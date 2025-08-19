@@ -1,0 +1,17 @@
+// 1. Add the plugins block at the top
+plugins {
+    id 'java'
+    id 'application'
+}
+
+// 2. Add the java block (this is the part you already had)
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+// 3. Add the application block to tell Gradle which is your main class
+application {
+    mainClass = 'Duke' 
+}
