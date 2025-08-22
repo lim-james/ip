@@ -32,16 +32,16 @@ public class Duke {
         String input = sc.nextLine();
         System.out.println(divider);
 
-        ArrayList<String> list = new ArrayList<>();
-
+        ArrayList<Task> list = new ArrayList<>();
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                for (var i = 0; i < list.size(); ++i)
-                    System.out.println((i + 1) + ": " + list.get(i));
+                for (var i = 0; i < list.size(); ++i) {
+                    System.out.println((i + 1) + ". " + list.get(i).toString());
+                }
             } else {
                 System.out.println("added: " + input);
-                list.add(input);
+                list.add(new Task(input));
             }
             System.out.println(divider);
             input = sc.nextLine();
