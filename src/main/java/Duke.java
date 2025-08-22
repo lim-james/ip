@@ -25,17 +25,17 @@ public class Duke {
         System.out.println(divider);
     }
 
-    private static void echoLoop() {
+    private static void run() {
         Scanner sc = new Scanner(System.in);
         System.out.println(divider);
-        String userInput = sc.nextLine();
+        String input = sc.nextLine();
 
         System.out.println(divider);
 
-        while (!userInput.equals("bye")) {
-            System.out.println("> " + userInput);
+        while (!input.equals("bye")) {
+            System.out.println("added: " + input);
             System.out.println(divider);
-            userInput = sc.nextLine();
+            input = sc.nextLine();
         }
 
         sc.close();
@@ -43,7 +43,7 @@ public class Duke {
 
     public static void main(String[] args) {
         displayWelcome();
-        echoLoop();
+        run();
         displayExit();
         return;
     }
