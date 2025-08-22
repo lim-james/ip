@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Optional;
+
 
 public class Duke {
     private static final String chatbotName = "Peter";
@@ -23,6 +25,15 @@ public class Duke {
 
         System.out.println(exitMsg);
         System.out.println(divider);
+    }
+
+    private static Task buildTask(String input) {
+        Task ret = ToDo.build(input);
+        if (ret == null) 
+            ret = Deadline.build(input);
+        if (ret == null) 
+            ret = Event.build(input);
+        return ret;
     }
 
     private static void run() {
@@ -51,9 +62,11 @@ public class Duke {
                 task.unmark();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + task.toString());
-            } else {
-                System.out.println("added: " + input);
-                list.add(new Task(input));
+            } else { 
+                Task task = buildTask(input);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task.toString());
+                list.add(task);
             }
 
             System.out.println(divider);
