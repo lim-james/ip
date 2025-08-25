@@ -94,22 +94,31 @@ public class Duke {
     }
 
     private static void run() {
+        Storage storage = new Storage("./james-2103-ip.txt");
+        CommandParser parser = new CommandParser();
+
+        ArrayList<Task> list;
+        try {
+            list = storage.load();
+        } catch (Exception e) {
+            System.out.println("OH DEAR! " + e.getMessage());
+            return;
+        }
+
         Scanner sc = new Scanner(System.in);
-
         System.out.println(divider);
-        CommandParserResult cmd = Command.fromString(sc.nextLine());
+        CommandParserResult cmd = parser.parse(sc.nextLine());
         System.out.println(divider);
-
-        ArrayList<Task> list = new ArrayList<>();
 
         while (!cmd.getCommand().equals(Command.BYE)) {
             try {
                 branch(cmd, list);
+                storage.save(list);
             } catch (Exception e) {
                 System.out.println("OH DEAR! " + e.getMessage());
             }
             System.out.println(divider);
-            cmd = Command.fromString(sc.nextLine());
+            cmd = parser.parse(sc.nextLine());
             System.out.println(divider);
         }
 
