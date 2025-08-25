@@ -12,7 +12,7 @@ public class Event extends Task {
     }
 
     public static Task build(String str) {
-        Pattern pattern = Pattern.compile("^event\\s+(.+?)\\s*/from\\s*([^\\s]+)\\s*/to\\s*([^\\s]+)$");
+        Pattern pattern = Pattern.compile("^event\\s+(.+?)\\s*/from\\s*(.+?)\\s*/to\\s*(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {

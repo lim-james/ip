@@ -10,7 +10,7 @@ public class Deadline extends Task {
     }
 
     public static Task build(String str) {
-        Pattern pattern = Pattern.compile("^deadline\\s+(.+?)\\s*/by\\s+([^\\s]+)$");
+        Pattern pattern = Pattern.compile("^deadline\\s+(.+?)\\s*/by\\s+(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {
