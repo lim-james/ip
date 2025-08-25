@@ -26,49 +26,59 @@ public class Duke {
         System.out.println(divider);
     }
 
-    private static Task buildTask(String input) throws IncompleteTaskException {
-        Task ret = null;
-        if (ToDo.isMatch(input)) {
-            ret = ToDo.build(input);
-        } else if (Deadline.isMatch(input)) {
-            ret = Deadline.build(input);
-        } else if (Event.isMatch(input)) {
-            ret = Event.build(input);
-        }
-        return ret;
-    }
-
-    private static void branch(String input, ArrayList<Task> list) throws IncompleteTaskException, UnknownCommandException {
-        if (input.equals("list")) {
-            for (var i = 0; i < list.size(); ++i) {
-                System.out.println((i + 1) + ". " + list.get(i).toString());
-            }
-        } else if (input.startsWith("mark ")) {
-            int index = Integer.parseInt(input.substring(5)) - 1;
-            Task task = list.get(index);
-            task.mark();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("  " + task.toString());
-        } else if (input.startsWith("unmark ")) {
-            int index = Integer.parseInt(input.substring(7)) - 1;
-            Task task = list.get(index);
-            task.unmark();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("  " + task.toString());
-        } else if (input.startsWith("delete ")) {
-            int index = Integer.parseInt(input.substring(7)) - 1;
-            Task task = list.remove(index);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + task.toString());
-        } else { 
-            Task task = buildTask(input);
-            if (task != null) {
+    private static void branch(
+        CommandParserResult cmd, 
+        ArrayList<Task> list
+    ) throws IncompleteTaskException, UnknownCommandException {
+        int index;
+        Task task;
+        String desc = cmd.getDescription();
+        switch (cmd.getCommand()) {
+            case Command.LIST:
+                for (var i = 0; i < list.size(); ++i) {
+                    System.out.println((i + 1) + ". " + list.get(i).toString());
+                }
+                break;
+            case Command.MARK:
+                index = Integer.parseInt(desc) - 1;
+                task = list.get(index);
+                task.mark();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  " + task.toString());
+                break;
+            case Command.UNMARK:
+                index = Integer.parseInt(desc) - 1;
+                task = list.get(index);
+                task.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("  " + task.toString());
+                break;
+            case Command.DELETE:
+                index = Integer.parseInt(desc) - 1;
+                task = list.remove(index);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + task.toString());
+                break;
+            case Command.TODO:
+                task = ToDo.build(cmd.getDescription());
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + task.toString());
                 list.add(task);
-            } else {
+                break;
+            case Command.DEADLINE:
+                task = Deadline.build(cmd.getDescription());
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task.toString());
+                list.add(task);
+                break;
+            case Command.EVENT:
+                task = Event.build(cmd.getDescription());
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task.toString());
+                list.add(task);
+                break;
+            default:
                 throw new UnknownCommandException();
-            }
         }
     }
 
@@ -76,19 +86,19 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         System.out.println(divider);
-        String input = sc.nextLine();
+        CommandParserResult cmd = Command.fromString(sc.nextLine());
         System.out.println(divider);
 
         ArrayList<Task> list = new ArrayList<>();
 
-        while (!input.equals("bye")) {
+        while (!cmd.getCommand().equals(Command.BYE)) {
             try {
-                branch(input, list);
+                branch(cmd, list);
             } catch (Exception e) {
                 System.out.println("OH DEAR! " + e.getMessage());
             }
             System.out.println(divider);
-            input = sc.nextLine();
+            cmd = Command.fromString(sc.nextLine());
             System.out.println(divider);
         }
 

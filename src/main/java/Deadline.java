@@ -9,13 +9,8 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static boolean isMatch(String str) {
-        Pattern pattern = Pattern.compile("^deadline.*");
-        return pattern.matcher(str).matches();
-    }
-
     public static Task build(String str) throws IncompleteTaskException {
-        Pattern pattern = Pattern.compile("^deadline\\s+(.+?)\\s*/by\\s+(.+)$");
+        Pattern pattern = Pattern.compile("^(.+?)\\s*/by\\s+(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {

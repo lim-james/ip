@@ -11,13 +11,8 @@ public class Event extends Task {
         this.to = to;
     }
 
-    public static boolean isMatch(String str) {
-        Pattern pattern = Pattern.compile("^event.*");
-        return pattern.matcher(str).matches();
-    }
-
     public static Task build(String str) throws IncompleteTaskException {
-        Pattern pattern = Pattern.compile("^event\\s+(.+?)\\s*/from\\s*(.+?)\\s*/to\\s*(.+)$");
+        Pattern pattern = Pattern.compile("^(.+?)\\s*/from\\s*(.+?)\\s*/to\\s*(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {

@@ -6,13 +6,8 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static boolean isMatch(String str) {
-        Pattern pattern = Pattern.compile("^todo(\\s.*)?$");
-        return pattern.matcher(str).matches();
-    }
-
     public static Task build(String str) throws IncompleteTaskException {
-        Pattern pattern = Pattern.compile("^todo\\s+(.+)$");
+        Pattern pattern = Pattern.compile("^(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {
