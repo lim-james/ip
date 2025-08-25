@@ -1,0 +1,8 @@
+todo a dummy todo
+event this is happening /from 6 Aug /to 14 Sep
+deadline complete this /by 21 Aug
+list 
+mark 1
+list
+bye
+
