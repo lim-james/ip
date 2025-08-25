@@ -38,7 +38,7 @@ public class Duke {
         return ret;
     }
 
-    private static void branch(String input, ArrayList<Task> list) throws IncompleteTaskException {
+    private static void branch(String input, ArrayList<Task> list) throws IncompleteTaskException, UnknownCommandException {
         if (input.equals("list")) {
             for (var i = 0; i < list.size(); ++i) {
                 System.out.println((i + 1) + ". " + list.get(i).toString());
@@ -61,6 +61,8 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + task.toString());
                 list.add(task);
+            } else {
+                throw new UnknownCommandException();
             }
         }
     }
@@ -77,7 +79,7 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 branch(input, list);
-            } catch (IncompleteTaskException e) {
+            } catch (Exception e) {
                 System.out.println("OH DEAR! " + e.getMessage());
             }
             System.out.println(divider);
