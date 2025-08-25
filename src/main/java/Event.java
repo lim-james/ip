@@ -11,12 +11,17 @@ public class Event extends Task {
         this.to = to;
     }
 
-    public static Task build(String str) {
+    public static boolean isMatch(String str) {
+        Pattern pattern = Pattern.compile("^event.*");
+        return pattern.matcher(str).matches();
+    }
+
+    public static Task build(String str) throws IncompleteTaskException {
         Pattern pattern = Pattern.compile("^event\\s+(.+?)\\s*/from\\s*(.+?)\\s*/to\\s*(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {
-            return null;
+            throw new IncompleteTaskException("The 'event' command requires a description, a '/from' time, and a '/to' time. Format: event <description> /from <start time> /to <end time>");
         }
 
         return new Event(matcher.group(1), matcher.group(2), matcher.group(3));

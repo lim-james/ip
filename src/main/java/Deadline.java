@@ -9,12 +9,17 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    public static Task build(String str) {
+    public static boolean isMatch(String str) {
+        Pattern pattern = Pattern.compile("^deadline.*");
+        return pattern.matcher(str).matches();
+    }
+
+    public static Task build(String str) throws IncompleteTaskException {
         Pattern pattern = Pattern.compile("^deadline\\s+(.+?)\\s*/by\\s+(.+)$");
         Matcher matcher = pattern.matcher(str);
 
         if (!matcher.matches()) {
-            return null;
+            throw new IncompleteTaskException("The 'deadline' command requires a description and a '/by' date. Format: deadline <description> /by <date>");
         }
 
         return new Deadline(matcher.group(1), matcher.group(2));
