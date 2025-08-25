@@ -5,7 +5,6 @@ import java.util.Optional;
 public class Duke {
     private static final String chatbotName = "Peter";
     private static final String divider = "____________________________________________________________";
-
     
     private static void displayWelcome() {
         String welcomeMsg = String.format(
@@ -26,38 +25,50 @@ public class Duke {
         System.out.println(divider);
     }
 
+    private static void listTasks(ArrayList<Task> list) {
+        for (var i = 0; i < list.size(); ++i) {
+            System.out.println((i + 1) + ". " + list.get(i).toString());
+        }
+    }
+
+    private static void markTask(ArrayList<Task> list, int index) {
+        Task task = list.get(index);
+        task.mark();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task.toString());
+    }
+
+    private static void unmarkTask(ArrayList<Task> list, int index) {
+        Task task = list.get(index);
+        task.unmark();
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("  " + task.toString());
+    }
+
+    private static void deleteTask(ArrayList<Task> list, int index) {
+        Task task = list.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task.toString());
+    }
+
     private static void branch(
         CommandParserResult cmd, 
         ArrayList<Task> list
     ) throws IncompleteTaskException, UnknownCommandException {
-        int index;
         Task task;
         String desc = cmd.getDescription();
         switch (cmd.getCommand()) {
             case Command.LIST:
-                for (var i = 0; i < list.size(); ++i) {
-                    System.out.println((i + 1) + ". " + list.get(i).toString());
-                }
+                listTasks(list);
                 break;
             case Command.MARK:
-                index = Integer.parseInt(desc) - 1;
-                task = list.get(index);
-                task.mark();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + task.toString());
+                markTask(list, Integer.parseInt(desc) - 1);
                 break;
             case Command.UNMARK:
-                index = Integer.parseInt(desc) - 1;
-                task = list.get(index);
-                task.unmark();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("  " + task.toString());
+                unmarkTask(list, Integer.parseInt(desc) - 1);
                 break;
             case Command.DELETE:
-                index = Integer.parseInt(desc) - 1;
-                task = list.remove(index);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println("  " + task.toString());
+                deleteTask(list, Integer.parseInt(desc) - 1);
                 break;
             case Command.TODO:
                 task = ToDo.build(cmd.getDescription());
