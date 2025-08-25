@@ -55,6 +55,11 @@ public class Duke {
             task.unmark();
             System.out.println("OK, I've marked this task as not done yet:");
             System.out.println("  " + task.toString());
+        } else if (input.startsWith("delete ")) {
+            int index = Integer.parseInt(input.substring(7)) - 1;
+            Task task = list.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + task.toString());
         } else { 
             Task task = buildTask(input);
             if (task != null) {
