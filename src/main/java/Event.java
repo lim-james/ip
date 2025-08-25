@@ -28,4 +28,10 @@ public class Event extends Task {
         String toStr = "to: " + this.to;
         return "[E]" + super.toString() + " (" + fromStr + " " + toStr + ")";
     }
+
+    @Override
+    public String serialize() {
+        String details = " | " + this.from + " | " +  this.to;
+        return "E | " + super.serialize() + details;
+    }
 }

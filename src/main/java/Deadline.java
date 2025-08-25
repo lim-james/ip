@@ -24,4 +24,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadline + ")";
     }
+
+    @Override
+    public String serialize() {
+        String details = " | " + this.deadline;
+        return "D | " + super.serialize() + details;
+    }
 }
