@@ -30,10 +30,14 @@ public class Storage {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             while ((line = reader.readLine()) != null) {
-                task = parser.parseFromLine(line);
-                tasks.add(task);
+                try {
+                    task = parser.parseFromLine(line);
+                    tasks.add(task);
+                } catch (CorruptSaveException e) {
+                    System.out.println("Oh no! " + e.getMessage());
+                }
             }
-        } 
+        }
 
         return tasks;
     }
