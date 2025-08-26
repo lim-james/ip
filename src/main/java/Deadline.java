@@ -1,10 +1,12 @@
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDate deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -17,17 +19,26 @@ public class Deadline extends Task {
             throw new IncompleteTaskException("The 'deadline' command requires a description and a '/by' date. Format: deadline <description> /by <date>");
         }
 
-        return new Deadline(matcher.group(1), matcher.group(2));
+        String dateStr = matcher.group(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate date = LocalDate.parse(dateStr, formatter);
+
+        return new Deadline(matcher.group(1), date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
+        String dateStr = this.deadline.format(formatter);
+        return "[D]" + super.toString() + " (by: " + dateStr + ")";
     }
 
     @Override
     public String serialize() {
-        String details = " | " + this.deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String dateStr = this.deadline.format(formatter);
+
+        String details = " | " + dateStr;
         return "D | " + super.serialize() + details;
     }
 }

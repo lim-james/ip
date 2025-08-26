@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+
 public class TaskParser {
     public Task parseFromLine(String line) throws CorruptSaveException {
         String trimmedLine = line.trim();
@@ -20,7 +24,9 @@ public class TaskParser {
             if (parts.length < 4)
                 throw new CorruptSaveException(line);
 
-            String deadline = parts[3].trim();
+            String deadlineStr = parts[3].trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            LocalDate deadline = LocalDate.parse(deadlineStr, formatter);
             ret = new Deadline(description, deadline);
         } else if (type.equals("E")) {
             if (parts.length < 5)
