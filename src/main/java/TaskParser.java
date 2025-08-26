@@ -32,8 +32,11 @@ public class TaskParser {
             if (parts.length < 5)
                 throw new CorruptSaveException(line);
 
-            String from = parts[3].trim();
-            String to = parts[4].trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            String fromStr = parts[3].trim();
+            LocalDate from = LocalDate.parse(fromStr, formatter);
+            String toStr = parts[4].trim();
+            LocalDate to = LocalDate.parse(toStr, formatter);
             ret = new Event(description, from, to);
         }
 
