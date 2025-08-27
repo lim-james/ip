@@ -26,18 +26,8 @@ public class Duke {
 
     private static void newTask(TaskList list, String description) throws IncompleteTaskException, UnknownTaskTypeException {
         String[] parts = description.split(" ", 2);  
-        TaskParser parser;
         String taskType = parts[0].trim();
-        if (taskType.equals("todo")) {
-            parser = new ToDoParser();
-        } else if (taskType.equals("deadline")) {
-            parser = new DeadlineParser();
-        } else if (taskType.equals("event")) {
-            parser = new EventParser();
-        } else {
-            throw new UnknownTaskTypeException(taskType);
-        }
-
+        TaskParser parser = TaskParserFactory.createFileParser(taskType);
         Task task = parser.parse(parts[1].trim());
 
         System.out.println("Got it. I've added this task:");

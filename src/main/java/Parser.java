@@ -13,17 +13,7 @@ public class Parser {
         }
 
         String type = parts[0].trim();
-        TaskParser parser;
-
-        if (type.equals("T")) {
-            parser = new ToDoParser();
-        } else if (type.equals("D")) {
-            parser = new DeadlineParser();
-        } else if (type.equals("E")) {
-            parser = new EventParser();
-        } else {
-            throw new UnknownTaskTypeException(type);
-        }
+        TaskParser parser = TaskParserFactory.createFileParser(type);
 
         String description = parts[2].trim(); 
         Task ret = parser.parseFromFile(description);
