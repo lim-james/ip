@@ -19,4 +19,21 @@ public class DeadlineParser extends TaskParser {
 
         return new Deadline(matcher.group(1), date);
     }
+
+    @Override
+    public Task parseFromFile(String description) throws CorruptSaveException {
+        String[] parts = description.split("\\|");
+        
+        if (parts.length < 2)
+            throw new CorruptSaveException("Deadline description incomplete '" + description + "'");
+
+        description = parts[0].trim();
+
+        String deadlineStr = parts[1].trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate deadline = LocalDate.parse(deadlineStr, formatter);
+
+        return new Deadline(description, deadline);
+    }
 }
+

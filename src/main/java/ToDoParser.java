@@ -13,4 +13,9 @@ public class ToDoParser extends TaskParser {
 
         return new ToDo(matcher.group(1));
     }
+
+    @Override
+    public Task parseFromFile(String description) throws CorruptSaveException {
+        return new ToDo(description);
+    }
 }

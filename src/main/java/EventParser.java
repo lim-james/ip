@@ -22,4 +22,23 @@ public class EventParser extends TaskParser {
 
         return new Event(matcher.group(1), from, to);
     }
+
+    @Override
+    public Task parseFromFile(String description) throws CorruptSaveException {
+        String[] parts = description.split("\\|");
+        
+        if (parts.length < 3)
+            throw new CorruptSaveException("Event description incomplete '" + description + "'");
+
+        description = parts[0].trim();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String fromStr = parts[1].trim();
+        LocalDate from = LocalDate.parse(fromStr, formatter);
+        String toStr = parts[2].trim();
+        LocalDate to = LocalDate.parse(toStr, formatter);
+
+        return new Event(description, from, to);
+    }
 }
+
