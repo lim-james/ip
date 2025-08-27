@@ -1,0 +1,16 @@
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class ToDoParser extends TaskParser {
+    @Override
+    public Task parse(String description) throws IncompleteTaskException {
+        Pattern pattern = Pattern.compile("^(.+)$");
+        Matcher matcher = pattern.matcher(description);
+
+        if (!matcher.matches()) {
+            throw new IncompleteTaskException("The description for a 'todo' task cannot be empty.");
+        }
+
+        return new ToDo(matcher.group(1));
+    }
+}

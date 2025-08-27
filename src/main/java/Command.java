@@ -4,9 +4,7 @@ public enum Command {
     MARK("mark"),
     UNMARK("unmark"),
     DELETE("delete"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
+    NEW("new"),
     UNKNOWN("");
 
     private final String prefix;

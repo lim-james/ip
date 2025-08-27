@@ -46,10 +46,31 @@ public class Duke {
         System.out.println("  " + task.toString());
     }
 
+    private static void newTask(TaskList list, String description) throws IncompleteTaskException, UnknownTaskTypeException {
+        String[] parts = description.split(" ", 2);  
+        TaskParser parser;
+        String taskType = parts[0].trim();
+        if (taskType.equals("todo")) {
+            parser = new ToDoParser();
+        } else if (taskType.equals("deadline")) {
+            parser = new DeadlineParser();
+        } else if (taskType.equals("event")) {
+            parser = new EventParser();
+        } else {
+            throw new UnknownTaskTypeException(taskType);
+        }
+
+        Task task = parser.parse(parts[1].trim());
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task.toString());
+        list.add(task);
+    }
+
     private static void branch(
         CommandParserResult cmd, 
         TaskList list
-    ) throws IncompleteTaskException, UnknownCommandException {
+    ) throws IncompleteTaskException, UnknownCommandException, UnknownTaskTypeException {
         Task task;
         String desc = cmd.getDescription();
         switch (cmd.getCommand()) {
@@ -65,23 +86,8 @@ public class Duke {
             case Command.DELETE:
                 deleteTask(list, Integer.parseInt(desc) - 1);
                 break;
-            case Command.TODO:
-                task = ToDo.build(cmd.getDescription());
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task.toString());
-                list.add(task);
-                break;
-            case Command.DEADLINE:
-                task = Deadline.build(cmd.getDescription());
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task.toString());
-                list.add(task);
-                break;
-            case Command.EVENT:
-                task = Event.build(cmd.getDescription());
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + task.toString());
-                list.add(task);
+            case Command.NEW:
+                newTask(list, desc);
                 break;
             default:
                 throw new UnknownCommandException();

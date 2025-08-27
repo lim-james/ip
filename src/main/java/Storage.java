@@ -15,31 +15,32 @@ public class Storage {
 
     public TaskList load()  throws IOException {
         TaskList tasks = new TaskList();
-        File file = new File(filepath);
-
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            return tasks;
-        }
-
-        TaskParser parser = new TaskParser();
-
-        String line;
-        Task task;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            while ((line = reader.readLine()) != null) {
-                try {
-                    task = parser.parseFromLine(line);
-                    tasks.add(task);
-                } catch (CorruptSaveException e) {
-                    System.out.println("Oh no! " + e.getMessage());
-                }
-            }
-        }
-
         return tasks;
+//         File file = new File(filepath);
+// 
+//         if (!file.exists()) {
+//             file.getParentFile().mkdirs();
+//             file.createNewFile();
+//             return tasks;
+//         }
+// 
+//         Parser parser = new Parser();
+// 
+//         String line;
+//         Task task;
+// 
+//         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//             while ((line = reader.readLine()) != null) {
+//                 try {
+//                     task = parser.parseFromLine(line);
+//                     tasks.add(task);
+//                 } catch (CorruptSaveException e) {
+//                     System.out.println("Oh no! " + e.getMessage());
+//                 }
+//             }
+//         }
+// 
+//         return tasks;
     }
 
     public void save(TaskList list) throws IOException { 
