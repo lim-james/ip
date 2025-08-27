@@ -1,6 +1,6 @@
 todo a dummy todo
-event this is happening /from 6 Aug /to 14 Sep
-deadline complete this /by 21 Aug
+event this is happening /from Aug 6 2025 /to Sep 14 2025
+deadline complete this /by Aug 21 2025
 list 
 mark 1
 list
