@@ -2,28 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static final String chatbotName = "Peter";
-    private static final String divider = "____________________________________________________________";
-    
-    private static void displayWelcome() {
-        String welcomeMsg = String.format(
-            """
- Hello! I'm %s
- What can I do for you?""", 
-            chatbotName
-        );
-        System.out.println(divider);
-        System.out.println(welcomeMsg);
-    }
-
-    private static void displayExit() {
-        String exitMsg = """
- Bye. Hope to see you again soon!""";
-
-        System.out.println(exitMsg);
-        System.out.println(divider);
-    }
-
     private static void listTasks(TaskList list) {
         System.out.println(list.toString());
     }
@@ -95,6 +73,9 @@ public class Duke {
     }
 
     private static void run() {
+        Ui ui = new Ui("Peter");
+        ui.displayWelcome();
+
         Storage storage = new Storage("./james-2103-ip.txt");
         CommandParser parser = new CommandParser();
 
@@ -107,9 +88,9 @@ public class Duke {
         }
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(divider);
+        ui.drawLine();
         CommandParserResult cmd = parser.parse(sc.nextLine());
-        System.out.println(divider);
+        ui.drawLine();
 
         while (!cmd.getCommand().equals(Command.BYE)) {
             try {
@@ -118,18 +99,18 @@ public class Duke {
             } catch (Exception e) {
                 System.out.println("OH DEAR! " + e.getMessage());
             }
-            System.out.println(divider);
+            ui.drawLine();
             cmd = parser.parse(sc.nextLine());
-            System.out.println(divider);
+            ui.drawLine();
         }
 
         sc.close();
+
+        ui.displayExit();
     }
 
     public static void main(String[] args) {
-        displayWelcome();
         run();
-        displayExit();
         return;
     }
 }
