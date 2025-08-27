@@ -13,8 +13,8 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public ArrayList<Task> load()  throws IOException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList load()  throws IOException {
+        TaskList tasks = new TaskList();
         File file = new File(filepath);
 
         if (!file.exists()) {
@@ -42,7 +42,7 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> list) throws IOException { 
+    public void save(TaskList list) throws IOException { 
         File file = new File(filepath);
 
         if (!file.exists()) {
@@ -51,10 +51,7 @@ public class Storage {
         }
 
 
-        String content = list.stream()
-                             .map(a -> a.serialize())
-                             .reduce("", (a,b) -> a + "\n" + b)
-                             .trim();
+        String content = list.serialize();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) { // false for overwrite, true for append
             writer.write(content);

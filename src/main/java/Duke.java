@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Duke {
     private static final String chatbotName = "Peter";
@@ -25,35 +24,31 @@ public class Duke {
         System.out.println(divider);
     }
 
-    private static void listTasks(ArrayList<Task> list) {
-        for (var i = 0; i < list.size(); ++i) {
-            System.out.println((i + 1) + ". " + list.get(i).toString());
-        }
+    private static void listTasks(TaskList list) {
+        System.out.println(list.toString());
     }
 
-    private static void markTask(ArrayList<Task> list, int index) {
-        Task task = list.get(index);
-        task.mark();
+    private static void markTask(TaskList list, int index) {
+        Task task = list.mark(index);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task.toString());
     }
 
-    private static void unmarkTask(ArrayList<Task> list, int index) {
-        Task task = list.get(index);
-        task.unmark();
+    private static void unmarkTask(TaskList list, int index) {
+        Task task = list.unmark(index);
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + task.toString());
     }
 
-    private static void deleteTask(ArrayList<Task> list, int index) {
-        Task task = list.remove(index);
+    private static void deleteTask(TaskList list, int index) {
+        Task task = list.delete(index);
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.toString());
     }
 
     private static void branch(
         CommandParserResult cmd, 
-        ArrayList<Task> list
+        TaskList list
     ) throws IncompleteTaskException, UnknownCommandException {
         Task task;
         String desc = cmd.getDescription();
@@ -97,7 +92,7 @@ public class Duke {
         Storage storage = new Storage("./james-2103-ip.txt");
         CommandParser parser = new CommandParser();
 
-        ArrayList<Task> list;
+        TaskList list;
         try {
             list = storage.load();
         } catch (Exception e) {
