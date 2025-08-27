@@ -1,5 +1,5 @@
 public class UnknownCommandException extends Exception {
-    public UnknownCommandException() {
-        super("Unknown command provided...");
+    public UnknownCommandException(String type) {
+        super("Unknown command provided '" + type + "'");
     }
 }
