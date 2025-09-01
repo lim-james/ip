@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class MarkCommand extends Command {
     @Override
     public void execute(TaskList list, String description) {

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskParser;
+import duke.task.TaskParserFactory;
+
 public class NewCommand extends Command {
     @Override
     public void execute(TaskList list, String description) {

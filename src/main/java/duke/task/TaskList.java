@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -42,6 +44,4 @@ public class TaskList {
                    .reduce("", (a,b) -> a + "\n" + b)
                    .trim();
     }
-
-
 }

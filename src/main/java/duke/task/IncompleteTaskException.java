@@ -1,3 +1,5 @@
+package duke.task;
+
 public class IncompleteTaskException extends Exception {
     public IncompleteTaskException(String message) {
         super(message);

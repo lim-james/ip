@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import duke.ui.Ui;
+import duke.command.Command;
+import duke.command.CommandFactory;
+import duke.task.TaskList;
+import duke.storage.Storage;
 
 public class Duke {
     private static void run() {
