@@ -1,3 +1,5 @@
+package duke.ui;
+
 public class Ui {
     private String assistantName;
 
@@ -8,8 +10,8 @@ public class Ui {
     public void displayWelcome() {
         String welcomeMsg = String.format(
             """
- Hello! I'm %s
- What can I do for you?""", 
+            Hello! I'm %s
+            What can I do for you?""", 
             assistantName
         );
         this.drawLine();
@@ -18,7 +20,7 @@ public class Ui {
 
     public void displayExit() {
         String exitMsg = """
- Bye. Hope to see you again soon!""";
+        Bye. Hope to see you again soon!""";
 
         System.out.println(exitMsg);
         this.drawLine();

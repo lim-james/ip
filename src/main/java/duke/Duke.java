@@ -1,5 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.ui.Ui;
 
 public class Duke {
     private static void run() {
