@@ -13,7 +13,7 @@ java {
 
 // 3. Add the application block to tell Gradle which is your main class
 application {
-    mainClass = 'Duke' 
+    mainClass = 'duke.Duke' 
 }
 
 run {
