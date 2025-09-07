@@ -9,7 +9,16 @@ import duke.command.CommandFactory;
 import duke.task.TaskList;
 import duke.storage.Storage;
 
+/**
+ * Entry point class for the Duke application. Initializes the user interface, storage, and task
+ * management system, and processes user commands until the application is terminated.
+ */
 public class Duke {
+
+    /**
+     * Runs the Duke application by setting up the user interface, storage, and task list.
+     * Continuously reads user input, executes commands, and saves tasks until the user exits.
+     */
     private static void run() {
         Ui ui = new Ui("Peter");
         ui.displayWelcome();
@@ -51,6 +60,11 @@ public class Duke {
         ui.displayExit();
     }
 
+    /**
+     * Main entry point for the Duke application.
+     *
+     * @param args Command-line arguments provided by the user.
+     */
     public static void main(String[] args) {
         run();
         return;

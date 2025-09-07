@@ -5,7 +5,16 @@ import java.util.regex.Matcher;
 
 import duke.storage.CorruptSaveException;
 
+/** Represents a parser that creates {@link ToDo} tasks from user input or saved file data. */
 public class ToDoParser extends TaskParser {
+
+    /**
+     * Parses a user-provided description into a {@link ToDo} task.
+     *
+     * @param description The description of the task.
+     * @return A new {@code ToDo} task containing the given description.
+     * @throws IncompleteTaskException If the description is empty or invalid.
+     */
     @Override
     public Task parse(String description) throws IncompleteTaskException {
         Pattern pattern = Pattern.compile("^(.+)$");
@@ -18,6 +27,13 @@ public class ToDoParser extends TaskParser {
         return new ToDo(matcher.group(1));
     }
 
+    /**
+     * Parses a saved description string from storage into a {@link ToDo} task.
+     *
+     * @param description The saved task description.
+     * @return A new {@code ToDo} task created from the saved description.
+     * @throws CorruptSaveException If the saved description is corrupted.
+     */
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
         return new ToDo(description);
