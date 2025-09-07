@@ -1,13 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import duke.ui.Ui;
 import duke.command.Command;
 import duke.command.CommandFactory;
-import duke.task.TaskList;
 import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+import java.util.Scanner;
 
 /**
  * Entry point class for the Duke application. Initializes the user interface, storage, and task
@@ -43,9 +42,9 @@ public class Duke {
                 String[] parts = userInput.split(" ", 2);
                 String cmdStr = parts[0];
                 String description = parts.length > 1 ? parts[1] : "";
-                Command cmd = CommandFactory.getCommand(cmdStr); 
+                Command cmd = CommandFactory.getCommand(cmdStr);
                 cmd.execute(list, description);
-                
+
                 storage.save(list);
             } catch (Exception e) {
                 System.out.println("OH DEAR! " + e.getMessage());

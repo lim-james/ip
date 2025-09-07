@@ -1,11 +1,12 @@
 package duke.task;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import duke.storage.CorruptSaveException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import duke.storage.CorruptSaveException;
 /** Represents a parser that creates {@link Event} tasks from user input or saved file data. */
 public class EventParser extends TaskParser {
 
@@ -25,7 +26,9 @@ public class EventParser extends TaskParser {
         Matcher matcher = pattern.matcher(description);
 
         if (!matcher.matches()) {
-            throw new IncompleteTaskException("The 'event' command requires a description, a '/from' time, and a '/to' time. Format: event <description> /from <start time> /to <end time>");
+            throw new IncompleteTaskException(
+                    "The 'event' command requires a description, a '/from' time, and a '/to' time."
+                            + " Format: event <description> /from <start time> /to <end time>");
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
@@ -49,9 +52,10 @@ public class EventParser extends TaskParser {
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
         String[] parts = description.split("\\|");
-        
-        if (parts.length < 3)
+
+        if (parts.length < 3) {
             throw new CorruptSaveException("Event description incomplete '" + description + "'");
+        }
 
         description = parts[0].trim();
 
@@ -64,4 +68,3 @@ public class EventParser extends TaskParser {
         return new Event(description, from, to);
     }
 }
-

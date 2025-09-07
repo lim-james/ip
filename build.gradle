@@ -7,7 +7,7 @@ plugins {
 // 2. Add the java block (this is the part you already had)
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(24)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 

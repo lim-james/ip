@@ -1,11 +1,11 @@
 package duke.task;
 
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import duke.storage.CorruptSaveException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import duke.storage.CorruptSaveException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Represents a parser that creates {@link Deadline} tasks from user input or saved file data. */
 public class DeadlineParser extends TaskParser {
@@ -26,7 +26,9 @@ public class DeadlineParser extends TaskParser {
         Matcher matcher = pattern.matcher(description);
 
         if (!matcher.matches()) {
-            throw new IncompleteTaskException("The 'deadline' command requires a description and a '/by' date. Format: deadline <description> /by <date>");
+            throw new IncompleteTaskException(
+                    "The 'deadline' command requires a description and a '/by' date. Format:"
+                            + " deadline <description> /by <date>");
         }
 
         String dateStr = matcher.group(2);
@@ -47,9 +49,10 @@ public class DeadlineParser extends TaskParser {
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
         String[] parts = description.split("\\|");
-        
-        if (parts.length < 2)
+
+        if (parts.length < 2) {
             throw new CorruptSaveException("Deadline description incomplete '" + description + "'");
+        }
 
         description = parts[0].trim();
 
@@ -60,4 +63,3 @@ public class DeadlineParser extends TaskParser {
         return new Deadline(description, deadline);
     }
 }
-

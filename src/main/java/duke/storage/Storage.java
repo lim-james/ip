@@ -1,22 +1,17 @@
 package duke.storage;
 
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
-
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskParser;
 import duke.task.TaskParserFactory;
 import duke.task.UnknownTaskTypeException;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Handles reading from and writing to the save file that stores tasks. Provides methods to load
@@ -56,17 +51,17 @@ public class Storage {
         String type = parts[0].trim();
         TaskParser parser = TaskParserFactory.createFileParser(type);
 
-        String description = parts[2].trim(); 
+        String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
 
-        boolean marked = parts[1].trim().equals("1");  
-        if (marked) 
+        boolean marked = parts[1].trim().equals("1");
+        if (marked) {
             ret.mark();
+        }
 
         return ret;
     }
 
-    public TaskList load()  throws IOException {
     /**
      * Loads tasks from the save file into a new {@link TaskList}. If the file does not exist, it is
      * created and an empty list is returned.
@@ -74,6 +69,7 @@ public class Storage {
      * @return A {@code TaskList} populated with tasks from the save file.
      * @throws IOException If an I/O error occurs when accessing the file.
      */
+    public TaskList load() throws IOException {
         TaskList tasks = new TaskList();
         File file = new File(filepath);
 
@@ -100,7 +96,6 @@ public class Storage {
         return tasks;
     }
 
-    public void save(TaskList list) throws IOException { 
     /**
      * Saves the given {@link TaskList} to the save file. Creates the file and directories if they
      * do not already exist.
@@ -108,6 +103,7 @@ public class Storage {
      * @param list The task list to save.
      * @throws IOException If an I/O error occurs when writing to the file.
      */
+    public void save(TaskList list) throws IOException {
         File file = new File(filepath);
 
         if (!file.exists()) {
@@ -115,10 +111,11 @@ public class Storage {
             file.createNewFile();
         }
 
-
         String content = list.serialize();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) {
+        try (BufferedWriter writer =
+                new BufferedWriter(
+                        new FileWriter(filepath, false))) { // false for overwrite, true for append
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {
