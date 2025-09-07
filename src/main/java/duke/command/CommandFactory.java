@@ -1,7 +1,7 @@
 package duke.command;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public class CommandFactory {
     private static final Map<String, Command> COMMANDS = new HashMap<>();
@@ -16,8 +16,9 @@ public class CommandFactory {
 
     public static Command getCommand(String type) throws UnknownCommandException {
         Command cmd = COMMANDS.get(type);
-        if (cmd == null)
+        if (cmd == null) {
             throw new UnknownCommandException(type);
+        }
         return cmd;
     }
 }

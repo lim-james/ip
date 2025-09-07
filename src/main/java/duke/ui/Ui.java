@@ -8,19 +8,22 @@ public class Ui {
     }
 
     public void displayWelcome() {
-        String welcomeMsg = String.format(
-            """
-            Hello! I'm %s
-            What can I do for you?""", 
-            assistantName
-        );
+        String welcomeMsg =
+                String.format(
+                        """
+                        Hello! I'm %s
+                        What can I do for you?\
+                        """,
+                        assistantName);
         this.drawLine();
         System.out.println(welcomeMsg);
     }
 
     public void displayExit() {
-        String exitMsg = """
-        Bye. Hope to see you again soon!""";
+        String exitMsg =
+                """
+                Bye. Hope to see you again soon!\
+                """;
 
         System.out.println(exitMsg);
         this.drawLine();

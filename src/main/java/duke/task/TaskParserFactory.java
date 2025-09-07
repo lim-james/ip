@@ -1,7 +1,7 @@
 package duke.task;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 public class TaskParserFactory {
     private static final Map<String, TaskParser> PARSERS = new HashMap<>();
@@ -17,8 +17,9 @@ public class TaskParserFactory {
 
     public static TaskParser createFileParser(String type) throws UnknownTaskTypeException {
         TaskParser parser = PARSERS.get(type);
-        if (parser == null)
+        if (parser == null) {
             throw new UnknownTaskTypeException(type);
+        }
         return parser;
     }
 }

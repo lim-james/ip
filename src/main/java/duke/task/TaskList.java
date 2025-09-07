@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     public Task delete(int at) {
-        return list.remove(at); 
+        return list.remove(at);
     }
 
     public Task mark(int at) {
@@ -39,9 +39,6 @@ public class TaskList {
     }
 
     public String serialize() {
-        return list.stream()
-                   .map(a -> a.serialize())
-                   .reduce("", (a,b) -> a + "\n" + b)
-                   .trim();
+        return list.stream().map(a -> a.serialize()).reduce("", (a, b) -> a + "\n" + b).trim();
     }
 }

@@ -1,21 +1,17 @@
 package duke.storage;
 
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
-
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskParser;
 import duke.task.TaskParserFactory;
 import duke.task.UnknownTaskTypeException;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Storage {
     private String filepath;
@@ -36,17 +32,18 @@ public class Storage {
         String type = parts[0].trim();
         TaskParser parser = TaskParserFactory.createFileParser(type);
 
-        String description = parts[2].trim(); 
+        String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
 
-        boolean marked = parts[1].trim().equals("1");  
-        if (marked) 
+        boolean marked = parts[1].trim().equals("1");
+        if (marked) {
             ret.mark();
+        }
 
         return ret;
     }
 
-    public TaskList load()  throws IOException {
+    public TaskList load() throws IOException {
         TaskList tasks = new TaskList();
         File file = new File(filepath);
 
@@ -73,7 +70,7 @@ public class Storage {
         return tasks;
     }
 
-    public void save(TaskList list) throws IOException { 
+    public void save(TaskList list) throws IOException {
         File file = new File(filepath);
 
         if (!file.exists()) {
@@ -81,10 +78,11 @@ public class Storage {
             file.createNewFile();
         }
 
-
         String content = list.serialize();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) { // false for overwrite, true for append
+        try (BufferedWriter writer =
+                new BufferedWriter(
+                        new FileWriter(filepath, false))) { // false for overwrite, true for append
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {
