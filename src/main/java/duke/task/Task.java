@@ -34,6 +34,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isMatching(String comp) {
+        return this.description.contains(comp);
+    }
+
     /**
      * Returns a string representation of the task for display purposes. The representation includes
      * the completion status indicator ({@code [X]} for done, {@code [ ]} for not done) and the

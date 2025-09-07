@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a collection of {@link Task} objects. Provides methods to add, remove, update,
@@ -9,11 +11,15 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** The underlying list storing all tasks. */
-    private ArrayList<Task> list;
+    private List<Task> list;
 
     /** Creates an empty {@code TaskList}. */
     public TaskList() {
         this.list = new ArrayList<>();
+    }
+
+    private TaskList(List<Task> list) {
+        this.list = list;
     }
 
     /**
@@ -57,6 +63,13 @@ public class TaskList {
         Task a = list.get(at);
         a.unmark();
         return a;
+    }
+
+    public TaskList filtered(String description) {
+        return new TaskList(
+                list.stream()
+                        .filter(task -> task.isMatching(description))
+                        .collect(Collectors.toList()));
     }
 
     /**

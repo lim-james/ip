@@ -17,6 +17,7 @@ public class CommandFactory {
         COMMANDS.put("unmark", new UnmarkCommand());
         COMMANDS.put("delete", new DeleteCommand());
         COMMANDS.put("new", new NewCommand());
+        COMMANDS.put("find", new FindCommand());
     }
 
     /**
