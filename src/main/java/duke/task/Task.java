@@ -17,6 +17,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public boolean isMatching(String comp) {
+        return this.description.contains(comp); 
+    }
+
     @Override
     public String toString() {
         return "[" + (this.isDone ? "X" : " ") + "] " + this.description;
