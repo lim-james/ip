@@ -34,6 +34,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Checks whether this task's description contains the given keyword or phrase.
+     *
+     * @param comp The keyword or phrase to check for.
+     * @return {@code true} if the description contains the given text, {@code false} otherwise.
+     */
     public boolean isMatching(String comp) {
         return this.description.contains(comp);
     }

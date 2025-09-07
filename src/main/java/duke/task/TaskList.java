@@ -18,6 +18,12 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Creates a new {@code TaskList} initialized with an existing list of tasks. Intended for
+     * internal use, such as filtering.
+     *
+     * @param list The list of tasks to initialize the task list with.
+     */
     private TaskList(List<Task> list) {
         this.list = list;
     }
@@ -65,6 +71,13 @@ public class TaskList {
         return a;
     }
 
+    /**
+     * Returns a new {@code TaskList} containing only the tasks whose descriptions match the given
+     * keyword or phrase.
+     *
+     * @param description The keyword or phrase to filter tasks by.
+     * @return A new {@code TaskList} containing the matching tasks.
+     */
     public TaskList filtered(String description) {
         return new TaskList(
                 list.stream()
