@@ -2,16 +2,33 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
-// 2. Add the java block (this is the part you already had)
+repositories {
+  mavenCentral()
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
-// 3. Add the application block to tell Gradle which is your main class
+checkstyle {
+  toolVersion = '10.24.0'                   // ensure modern Checkstyle
+  configFile = file('config/checkstyle/checkstyle.xml')
+  ignoreFailures = false
+  maxWarnings = 0
+}
+
+tasks.withType(Checkstyle).configureEach {
+  reports {
+    xml.required = false
+    html.required = true
+  }
+}
+
 application {
     mainClass = 'duke.Duke' 
 }
