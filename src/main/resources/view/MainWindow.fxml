@@ -24,7 +24,8 @@
                    prefWidth="324.0" 
                    AnchorPane.bottomAnchor="1.0" 
                    AnchorPane.leftAnchor="0.0" 
-                   AnchorPane.rightAnchor="76.0" />
+                   AnchorPane.rightAnchor="76.0" 
+                   promptText="How can I help you?"/>
         <Button fx:id="sendButton" 
                 layoutX="324.0" 
                 layoutY="558.0" 
