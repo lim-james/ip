@@ -15,9 +15,10 @@ public class MarkCommand extends Command {
      * @return A string message describing the result of executing the command.
      */
     @Override
-    public String execute(TaskList list, String description) {
+    public CommandResponse execute(TaskList list, String description) {
         int index = Integer.parseInt(description) - 1;
         Task task = list.mark(index);
-        return "Nice! I've marked this task as done:\n " + task;
+        return new CommandResponse(
+                "Nice! I've marked this task as done:\n " + task, ResponseType.SUCCESS);
     }
 }

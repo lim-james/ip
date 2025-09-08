@@ -1,4 +1,5 @@
 import duke.Duke;
+import duke.command.CommandResponse;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,12 +44,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = this.duke.getResponse(input);
-        this.dialogContainer
-                .getChildren()
-                .addAll(
-                        DialogBox.getUserDialog(input, this.userImage),
-                        DialogBox.getDukeDialog(response, this.dukeImage));
+        CommandResponse response = this.duke.getResponse(input);
+        DialogBox userDialog = DialogBox.getUserDialog(input, this.userImage);
+        DialogBox dukeDialog = DialogBox.getDukeDialog(response.getMessage(), this.dukeImage);
+        this.dialogContainer.getChildren().addAll(userDialog, dukeDialog);
         userInput.clear();
     }
 }

@@ -20,7 +20,7 @@ public class NewCommand extends Command {
      * @return A string message describing the result of executing the command.
      */
     @Override
-    public String execute(TaskList list, String description) {
+    public CommandResponse execute(TaskList list, String description) {
         String[] parts = description.split(" ", 2);
         String taskType = parts[0].trim();
 
@@ -29,9 +29,10 @@ public class NewCommand extends Command {
             Task task = parser.parse(parts[1].trim());
             list.add(task);
 
-            return "Got it. I've added this task:\n " + task;
+            return new CommandResponse(
+                    "Got it. I've added this task:\n " + task, ResponseType.SUCCESS);
         } catch (Exception e) {
-            return "OH DEAR! " + e.getMessage();
+            return new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
     }
 }

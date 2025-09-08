@@ -15,5 +15,5 @@ public abstract class Command {
      * @param description Additional details required to execute the command.
      * @return A string message describing the result of executing the command.
      */
-    public abstract String execute(TaskList list, String description);
+    public abstract CommandResponse execute(TaskList list, String description);
 }

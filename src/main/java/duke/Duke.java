@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandFactory;
+import duke.command.CommandResponse;
+import duke.command.ResponseType;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -25,9 +27,9 @@ public class Duke {
     }
 
     /** Generates a response for the user's chat message. */
-    public String getResponse(String input) {
+    public CommandResponse getResponse(String input) {
         String trimmedInput = input.trim();
-        String response = "";
+        CommandResponse response;
         try {
             String[] parts = trimmedInput.split(" ", 2);
             String cmdStr = parts[0];
@@ -37,7 +39,7 @@ public class Duke {
 
             storage.save(taskList);
         } catch (Exception e) {
-            response = "OH DEAR! " + e.getMessage();
+            response = new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
 
         return response;

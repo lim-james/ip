@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * @return A string message describing the result of executing the command.
      */
     @Override
-    public String execute(TaskList list, String description) {
-        return list.toString();
+    public CommandResponse execute(TaskList list, String description) {
+        return new CommandResponse(list.toString(), ResponseType.SUCCESS);
     }
 }

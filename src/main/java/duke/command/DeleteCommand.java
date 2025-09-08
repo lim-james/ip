@@ -14,9 +14,10 @@ public class DeleteCommand extends Command {
      * @return A string message describing the result of executing the command.
      */
     @Override
-    public String execute(TaskList list, String description) {
+    public CommandResponse execute(TaskList list, String description) {
         int index = Integer.parseInt(description) - 1;
         Task task = list.delete(index);
-        return "Noted. I've removed this task:\n " + task;
+        return new CommandResponse(
+                "Noted. I've removed this task:\n " + task, ResponseType.SUCCESS);
     }
 }

@@ -17,8 +17,9 @@ public class FindCommand extends Command {
      * @return A string message describing the result of executing the command.
      */
     @Override
-    public String execute(TaskList list, String description) {
+    public CommandResponse execute(TaskList list, String description) {
         TaskList filtered = list.filtered(description);
-        return "Here are the matching tasks in your list:\n" + filtered;
+        return new CommandResponse(
+                "Here are the matching tasks in your list:\n" + filtered, ResponseType.SUCCESS);
     }
 }
