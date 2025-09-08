@@ -22,12 +22,18 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+
+        this.dialogContainer
+                .getChildren()
+                .addAll(
+                        DialogBox.getDukeDialog(
+                                "Hello! I'm Peter. How can I help you?", this.dukeImage));
     }
 
     /** Injects the Duke instance */
     public void setDuke(Duke d) {
-        duke = d;
+        this.duke = d;
     }
 
     /**
@@ -37,12 +43,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer
+        String response = this.duke.getResponse(input);
+        this.dialogContainer
                 .getChildren()
                 .addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getDukeDialog(response, dukeImage));
+                        DialogBox.getUserDialog(input, this.userImage),
+                        DialogBox.getDukeDialog(response, this.dukeImage));
         userInput.clear();
     }
 }
