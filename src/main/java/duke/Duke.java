@@ -4,19 +4,16 @@ import duke.command.Command;
 import duke.command.CommandFactory;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Entry point class for the Duke application. Initializes the user interface, storage, and task
  * management system, and processes user commands until the application is terminated.
  */
 public class Duke {
-    private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
     public Duke() {
-        this.ui = new Ui("Peter");
         this.storage = new Storage("./james-2103-ip.txt");
 
         try {
