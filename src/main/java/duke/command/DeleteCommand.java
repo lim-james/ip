@@ -11,12 +11,12 @@ public class DeleteCommand extends Command {
      *
      * @param list The task list containing the task to be deleted.
      * @param description The 1-based index of the task to delete.
+     * @return A string message describing the result of executing the command.
      */
     @Override
-    public void execute(TaskList list, String description) {
+    public String execute(TaskList list, String description) {
         int index = Integer.parseInt(description) - 1;
         Task task = list.delete(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task.toString());
+        return "Noted. I've removed this task:\n " + task;
     }
 }

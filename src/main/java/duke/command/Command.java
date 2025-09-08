@@ -13,6 +13,7 @@ public abstract class Command {
      *
      * @param list The task list on which the command operates.
      * @param description Additional details required to execute the command.
+     * @return A string message describing the result of executing the command.
      */
-    public abstract void execute(TaskList list, String description);
+    public abstract String execute(TaskList list, String description);
 }

@@ -14,10 +14,11 @@ public class FindCommand extends Command {
      *
      * @param list The task list to search within.
      * @param description The keyword or phrase to match against task descriptions.
+     * @return A string message describing the result of executing the command.
      */
     @Override
-    public void execute(TaskList list, String description) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(list.filtered(description));
+    public String execute(TaskList list, String description) {
+        TaskList filtered = list.filtered(description);
+        return "Here are the matching tasks in your list:\n" + filtered;
     }
 }

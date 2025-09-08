@@ -10,9 +10,10 @@ public class ListCommand extends Command {
      *
      * @param list The task list whose tasks will be displayed.
      * @param description Not used by this command.
+     * @return A string message describing the result of executing the command.
      */
     @Override
-    public void execute(TaskList list, String description) {
-        System.out.println(list.toString());
+    public String execute(TaskList list, String description) {
+        return list.toString();
     }
 }

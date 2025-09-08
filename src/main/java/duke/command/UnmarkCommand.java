@@ -12,12 +12,12 @@ public class UnmarkCommand extends Command {
      *
      * @param list The task list containing the task to be unmarked.
      * @param description The 1-based index of the task to mark as not done.
+     * @return A string message describing the result of executing the command.
      */
     @Override
-    public void execute(TaskList list, String description) {
+    public String execute(TaskList list, String description) {
         int index = Integer.parseInt(description) - 1;
         Task task = list.unmark(index);
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("  " + task.toString());
+        return "OK, I've marked this task as not done yet:\n " + task;
     }
 }

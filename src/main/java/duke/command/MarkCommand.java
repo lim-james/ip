@@ -12,12 +12,12 @@ public class MarkCommand extends Command {
      *
      * @param list The task list containing the task to be marked.
      * @param description The 1-based index of the task to mark as done.
+     * @return A string message describing the result of executing the command.
      */
     @Override
-    public void execute(TaskList list, String description) {
+    public String execute(TaskList list, String description) {
         int index = Integer.parseInt(description) - 1;
         Task task = list.mark(index);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + task.toString());
+        return "Nice! I've marked this task as done:\n " + task;
     }
 }
