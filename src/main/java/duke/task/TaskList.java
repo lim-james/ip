@@ -92,11 +92,9 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String ret = "";
-        for (var i = 0; i < list.size(); ++i) {
-            ret += (i + 1) + ". " + list.get(i).toString() + "\n";
-        }
-        return ret.trim();
+        return IntStream.range(0, list.size())
+                .mapToObj(i -> (i + 1) + ". " + list.get(i).toString())
+                .collect(Collectors.joining("\n"));
     }
 
     /**
