@@ -83,7 +83,7 @@ public class Storage {
             while ((line = reader.readLine()) != null) {
                 try {
                     tasks.add(parseFromLine(line));
-                } catch (Exception e) {
+                } catch (CorruptSaveException | UnknownTaskTypeException e) {
                     System.out.println("Oh no! " + e.getMessage());
                 }
             }
