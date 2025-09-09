@@ -20,6 +20,7 @@ import java.io.IOException;
 public class Storage {
 
     private final String TASK_MARKED = "1";
+
     /** The path to the save file used for persistence. */
     private final String filepath;
 
@@ -78,9 +79,8 @@ public class Storage {
             return tasks;
         }
 
-        String line;
-
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 try {
                     tasks.add(parseFromLine(line));
@@ -108,9 +108,8 @@ public class Storage {
             file.createNewFile();
         }
 
-        String content = list.serialize();
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) {
+            String content = list.serialize();
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {
