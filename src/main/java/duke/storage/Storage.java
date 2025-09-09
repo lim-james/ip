@@ -19,6 +19,7 @@ import java.io.IOException;
  */
 public class Storage {
 
+    private final String TASK_MARKED = "1";
     /** The path to the save file used for persistence. */
     private final String filepath;
 
@@ -54,7 +55,7 @@ public class Storage {
         String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
 
-        boolean isMarked = parts[1].trim().equals("1");
+        boolean isMarked = parts[1].trim().equals(TASK_MARKED);
         if (isMarked) {
             ret.mark();
         }
