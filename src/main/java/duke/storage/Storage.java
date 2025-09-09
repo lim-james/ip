@@ -80,7 +80,7 @@ public class Storage {
 
         String line;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
             while ((line = reader.readLine()) != null) {
                 try {
                     tasks.add(parseFromLine(line));
@@ -110,9 +110,7 @@ public class Storage {
 
         String content = list.serialize();
 
-        try (BufferedWriter writer =
-                new BufferedWriter(
-                        new FileWriter(filepath, false))) { // false for overwrite, true for append
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) {
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {
