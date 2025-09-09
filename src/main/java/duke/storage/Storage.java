@@ -20,7 +20,7 @@ import java.io.IOException;
 public class Storage {
 
     /** The path to the save file used for persistence. */
-    private String filepath;
+    private final String filepath;
 
     /**
      * Creates a new {@code Storage} instance with the specified file path.
