@@ -54,9 +54,7 @@ public class TaskList {
      * @return The updated task after being marked.
      */
     public Task mark(int at) {
-        Task a = this.list.get(at);
-        a.mark();
-        return a;
+        return this.list.get(at).mark();
     }
 
     /**
@@ -66,9 +64,7 @@ public class TaskList {
      * @return The updated task after being unmarked.
      */
     public Task unmark(int at) {
-        Task a = this.list.get(at);
-        a.unmark();
-        return a;
+        return this.list.get(at).unmark();
     }
 
     /**
