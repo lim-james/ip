@@ -34,7 +34,7 @@ public class TaskList {
      * @param task The task to add.
      */
     public void add(Task task) {
-        list.add(task);
+        this.list.add(task);
     }
 
     /**
@@ -44,7 +44,7 @@ public class TaskList {
      * @return The removed task.
      */
     public Task delete(int at) {
-        return list.remove(at);
+        return this.list.remove(at);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TaskList {
      * @return The updated task after being marked.
      */
     public Task mark(int at) {
-        Task a = list.get(at);
+        Task a = this.list.get(at);
         a.mark();
         return a;
     }
@@ -66,7 +66,7 @@ public class TaskList {
      * @return The updated task after being unmarked.
      */
     public Task unmark(int at) {
-        Task a = list.get(at);
+        Task a = this.list.get(at);
         a.unmark();
         return a;
     }
@@ -80,7 +80,7 @@ public class TaskList {
      */
     public TaskList filtered(String description) {
         return new TaskList(
-                list.stream()
+                this.list.stream()
                         .filter(task -> task.isMatching(description))
                         .collect(Collectors.toList()));
     }
@@ -93,8 +93,8 @@ public class TaskList {
     @Override
     public String toString() {
         String ret = "";
-        for (var i = 0; i < list.size(); ++i) {
-            ret += (i + 1) + ". " + list.get(i).toString() + "\n";
+        for (var i = 0; i < this.list.size(); ++i) {
+            ret += (i + 1) + ". " + this.list.get(i).toString() + "\n";
         }
         return ret.trim();
     }
@@ -106,6 +106,6 @@ public class TaskList {
      * @return The serialized string of the task list.
      */
     public String serialize() {
-        return list.stream().map(Task::serialize).reduce("", (a, b) -> a + "\n" + b).trim();
+        return this.list.stream().map(Task::serialize).reduce("", (a, b) -> a + "\n" + b).trim();
     }
 }
