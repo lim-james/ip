@@ -74,19 +74,15 @@ public class Storage {
         File file = new File(filepath);
 
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
             return tasks;
         }
 
         String line;
-        Task task;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             while ((line = reader.readLine()) != null) {
                 try {
-                    task = parseFromLine(line);
-                    tasks.add(task);
+                    tasks.add(parseFromLine(line));
                 } catch (Exception e) {
                     System.out.println("Oh no! " + e.getMessage());
                 }
