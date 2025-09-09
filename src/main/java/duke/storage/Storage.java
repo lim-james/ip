@@ -54,8 +54,8 @@ public class Storage {
         String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
 
-        boolean marked = parts[1].trim().equals("1");
-        if (marked) {
+        boolean isMarked = parts[1].trim().equals("1");
+        if (isMarked) {
             ret.mark();
         }
 
