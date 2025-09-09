@@ -19,8 +19,10 @@ import java.io.IOException;
  */
 public class Storage {
 
+    private final String TASK_MARKED = "1";
+
     /** The path to the save file used for persistence. */
-    private String filepath;
+    private final String filepath;
 
     /**
      * Creates a new {@code Storage} instance with the specified file path.
@@ -54,8 +56,8 @@ public class Storage {
         String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
 
-        boolean marked = parts[1].trim().equals("1");
-        if (marked) {
+        boolean isMarked = parts[1].trim().equals(TASK_MARKED);
+        if (isMarked) {
             ret.mark();
         }
 
@@ -74,20 +76,15 @@ public class Storage {
         File file = new File(filepath);
 
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
             return tasks;
         }
 
-        String line;
-        Task task;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 try {
-                    task = parseFromLine(line);
-                    tasks.add(task);
-                } catch (Exception e) {
+                    tasks.add(parseFromLine(line));
+                } catch (CorruptSaveException | UnknownTaskTypeException e) {
                     System.out.println("Oh no! " + e.getMessage());
                 }
             }
@@ -111,11 +108,8 @@ public class Storage {
             file.createNewFile();
         }
 
-        String content = list.serialize();
-
-        try (BufferedWriter writer =
-                new BufferedWriter(
-                        new FileWriter(filepath, false))) { // false for overwrite, true for append
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) {
+            String content = list.serialize();
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {

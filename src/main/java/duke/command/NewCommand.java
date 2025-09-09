@@ -1,9 +1,11 @@
 package duke.command;
 
+import duke.task.IncompleteTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskParser;
 import duke.task.TaskParserFactory;
+import duke.task.UnknownTaskTypeException;
 
 /**
  * Represents a command that creates and adds a new task to the specified task list based on the
@@ -31,7 +33,7 @@ public class NewCommand extends Command {
 
             return new CommandResponse(
                     "Got it. I've added this task:\n " + task, ResponseType.SUCCESS);
-        } catch (Exception e) {
+        } catch (UnknownTaskTypeException | IncompleteTaskException e) {
             return new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
     }

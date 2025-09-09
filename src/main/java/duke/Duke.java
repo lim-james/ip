@@ -4,8 +4,11 @@ import duke.command.Command;
 import duke.command.CommandFactory;
 import duke.command.CommandResponse;
 import duke.command.ResponseType;
+import duke.command.UnknownCommandException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+
+import java.io.IOException;
 
 /**
  * Entry point class for the Duke application. Initializes the user interface, storage, and task
@@ -20,7 +23,7 @@ public class Duke {
 
         try {
             this.taskList = this.storage.load();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("OH DEAR! " + e.getMessage());
             return;
         }
@@ -38,7 +41,7 @@ public class Duke {
             response = cmd.execute(taskList, description);
 
             storage.save(taskList);
-        } catch (Exception e) {
+        } catch (UnknownCommandException | IOException e) {
             response = new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
 

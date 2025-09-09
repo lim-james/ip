@@ -25,13 +25,15 @@ public abstract class Task {
     }
 
     /** Marks the task as completed. */
-    public void mark() {
+    public Task mark() {
         this.isDone = true;
+        return this;
     }
 
     /** Marks the task as not completed. */
-    public void unmark() {
+    public Task unmark() {
         this.isDone = false;
+        return this;
     }
 
     /**

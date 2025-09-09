@@ -47,8 +47,6 @@ public class Deadline extends Task {
     public String serialize() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         String dateStr = this.deadline.format(formatter);
-
-        String details = " | " + dateStr;
-        return "D | " + super.serialize() + details;
+        return "D | " + super.serialize() + " | " + dateStr;
     }
 }
