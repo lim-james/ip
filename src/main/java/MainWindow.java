@@ -25,11 +25,9 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
 
-        this.dialogContainer
-                .getChildren()
-                .addAll(
-                        DialogBox.getDukeDialog(
-                                "Hello! I'm Peter. How can I help you?", this.dukeImage));
+        String welcomeMsg = "Hello! I'm Peter. How can I help you?";
+        DialogBox welcomeDialog = DialogBox.getDukeDialog(welcomeMsg, this.dukeImage);
+        this.dialogContainer.getChildren().addAll(welcomeDialog);
     }
 
     /** Injects the Duke instance */
