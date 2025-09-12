@@ -70,7 +70,7 @@ public abstract class Task {
      * @return The serialized string of the task.
      */
     public String serialize() {
-        String done = isDone ? "1" : "0";
+        String done = this.isDone ? "1" : "0";
         return done + " | " + this.description;
     }
 }
