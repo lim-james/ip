@@ -27,10 +27,16 @@ public class Duke {
             System.out.println("OH DEAR! " + e.getMessage());
             return;
         }
+
+        assert this.taskList != null
+                : "TaskList should not be null after successful initialization.";
     }
 
     /** Generates a response for the user's chat message. */
     public CommandResponse getResponse(String input) {
+        assert this.taskList != null
+                : "TaskList must be initialized before commands can be processed.";
+
         String trimmedInput = input.trim();
         CommandResponse response;
         try {
@@ -44,6 +50,8 @@ public class Duke {
         } catch (UnknownCommandException | IOException e) {
             response = new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
+
+        assert response != null : "Command execution resulted in a null response.";
 
         return response;
     }
