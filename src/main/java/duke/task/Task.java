@@ -36,6 +36,10 @@ public abstract class Task {
         return this;
     }
 
+    public boolean isMarked() {
+        return this.isDone;
+    }
+
     /**
      * Checks whether this task's description contains the given keyword or phrase.
      *
