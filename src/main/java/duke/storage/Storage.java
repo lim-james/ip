@@ -30,6 +30,8 @@ public class Storage {
      * @param filepath The file path where tasks will be saved and loaded from.
      */
     public Storage(String filepath) {
+        assert filepath != null && !filepath.trim().isEmpty() : "Filepath cannot be null or empty.";
+
         this.filepath = filepath;
     }
 
@@ -42,6 +44,8 @@ public class Storage {
      * @throws UnknownTaskTypeException If the task type identifier is not recognized.
      */
     public Task parseFromLine(String line) throws CorruptSaveException, UnknownTaskTypeException {
+        assert line != null : "Line to parse cannot be null.";
+
         String trimmedLine = line.trim();
 
         String[] parts = trimmedLine.split("\\|", 3);
@@ -55,6 +59,8 @@ public class Storage {
 
         String description = parts[2].trim();
         Task ret = parser.parseFromFile(description);
+
+        assert ret != null : "TaskParser returned a null task.";
 
         boolean isMarked = parts[1].trim().equals(TASK_MARKED);
         if (isMarked) {
@@ -75,6 +81,8 @@ public class Storage {
         TaskList tasks = new TaskList();
         File file = new File(filepath);
 
+        assert file != null : "File object creation failed.";
+
         if (!file.exists()) {
             return tasks;
         }
@@ -90,6 +98,8 @@ public class Storage {
             }
         }
 
+        assert tasks != null : "TaskList loading resulted in a null object.";
+
         return tasks;
     }
 
@@ -101,6 +111,8 @@ public class Storage {
      * @throws IOException If an I/O error occurs when writing to the file.
      */
     public void save(TaskList list) throws IOException {
+        assert list != null : "TaskList to save cannot be null.";
+
         File file = new File(filepath);
 
         if (!file.exists()) {
@@ -110,6 +122,9 @@ public class Storage {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, false))) {
             String content = list.serialize();
+
+            assert content != null : "TaskList serialization resulted in a null string.";
+
             writer.write(content);
             System.out.println("Autosaved to " + filepath);
         } catch (IOException e) {
