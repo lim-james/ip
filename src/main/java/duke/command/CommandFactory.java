@@ -18,6 +18,13 @@ public class CommandFactory {
         COMMANDS.put("delete", new DeleteCommand());
         COMMANDS.put("new", new NewCommand());
         COMMANDS.put("find", new FindCommand());
+
+        assert COMMANDS.containsKey("list") : "Static map init error: Missing 'list' command.";
+        assert COMMANDS.containsKey("mark") : "Static map init error: Missing 'mark' command.";
+        assert COMMANDS.containsKey("unmark") : "Static map init error: Missing 'unmark' command.";
+        assert COMMANDS.containsKey("delete") : "Static map init error: Missing 'delete' command.";
+        assert COMMANDS.containsKey("new") : "Static map init error: Missing 'new' command.";
+        assert COMMANDS.containsKey("find") : "Static map init error: Missing 'find' command.";
     }
 
     /**
