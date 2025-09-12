@@ -51,6 +51,9 @@ public class EventParser extends TaskParser {
      */
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
+        assert description != null && !description.trim().isEmpty()
+                : "Corrupted save file: Event description is empty.";
+
         String[] parts = description.split("\\|");
 
         if (parts.length < 3) {

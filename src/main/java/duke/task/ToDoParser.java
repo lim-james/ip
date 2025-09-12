@@ -36,6 +36,13 @@ public class ToDoParser extends TaskParser {
      */
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
+        assert description != null && !description.trim().isEmpty()
+                : "Corrupted save file: ToDo description is empty.";
+
+        if (description.trim().isEmpty()) {
+            throw new CorruptSaveException("Saved ToDo description is empty.");
+        }
+
         return new ToDo(description);
     }
 }

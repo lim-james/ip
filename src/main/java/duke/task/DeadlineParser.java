@@ -48,6 +48,9 @@ public class DeadlineParser extends TaskParser {
      */
     @Override
     public Task parseFromFile(String description) throws CorruptSaveException {
+        assert description != null && !description.trim().isEmpty()
+                : "Corrupted save file: Deadline description is empty.";
+
         String[] parts = description.split("\\|");
 
         if (parts.length < 2) {
