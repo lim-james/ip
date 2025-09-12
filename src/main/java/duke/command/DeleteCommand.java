@@ -18,8 +18,16 @@ public class DeleteCommand extends Command {
         assert list != null : "TaskList provided to DeleteCommand.execute() cannot be null.";
         assert description != null
                 : "Description provided to DeleteCommand.execute() cannot be null.";
+
         int index = Integer.parseInt(description) - 1;
+
+        assert index >= 0 && index < list.size()
+                : "Parsed index is out of bounds for the TaskList.";
+
         Task task = list.delete(index);
+
+        assert task != null : "TaskList.delete() returned a null task.";
+
         return new CommandResponse(
                 "Noted. I've removed this task:\n " + task, ResponseType.SUCCESS);
     }

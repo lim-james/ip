@@ -21,7 +21,15 @@ public class MarkCommand extends Command {
                 : "Description provided to MarkCommand.execute() cannot be null.";
 
         int index = Integer.parseInt(description) - 1;
+
+        assert index >= 0 && index < list.size()
+                : "Parsed index is out of bounds for the TaskList.";
+
         Task task = list.mark(index);
+
+        assert task != null : "TaskList.mark() returned a null task.";
+        assert task.isDone() : "Task was not marked as done after MarkCommand execution.";
+
         return new CommandResponse(
                 "Nice! I've marked this task as done:\n " + task, ResponseType.SUCCESS);
     }

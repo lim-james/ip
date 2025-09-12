@@ -27,11 +27,17 @@ public class NewCommand extends Command {
         assert description != null : "Description provided to NewCommand.execute() cannot be null.";
 
         String[] parts = description.split(" ", 2);
+
+        assert parts.length > 1 : "Description split failed to produce enough parts.";
+
         String taskType = parts[0].trim();
 
         try {
             TaskParser parser = TaskParserFactory.createFileParser(taskType);
             Task task = parser.parse(parts[1].trim());
+
+            assert task != null : "TaskParser returned a null task object.";
+
             list.add(task);
 
             return new CommandResponse(

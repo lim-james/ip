@@ -21,7 +21,15 @@ public class UnmarkCommand extends Command {
                 : "Description provided to UnmarkCommand.execute() cannot be null.";
 
         int index = Integer.parseInt(description) - 1;
+
+        assert index >= 0 && index < list.size()
+                : "Parsed index is out of bounds for the TaskList.";
+
         Task task = list.unmark(index);
+
+        assert task != null : "TaskList.unmark() returned a null task.";
+        assert !task.isDone() : "Task was not marked as not done after UnmarkCommand execution.";
+
         return new CommandResponse(
                 "OK, I've marked this task as not done yet:\n " + task, ResponseType.SUCCESS);
     }

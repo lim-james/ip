@@ -21,7 +21,11 @@ public class FindCommand extends Command {
         assert list != null : "TaskList provided to FindCommand.execute() cannot be null.";
         assert description != null
                 : "Description provided to FindCommand.execute() cannot be null.";
+
         TaskList filtered = list.filtered(description);
+
+        assert filtered != null : "TaskList.filtered returned a null TaskList object.";
+
         return new CommandResponse(
                 "Here are the matching tasks in your list:\n" + filtered, ResponseType.SUCCESS);
     }
