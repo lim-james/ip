@@ -14,6 +14,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList list, String description) {
+        assert list != null : "TaskList provided to ListCommand.execute() cannot be null.";
         return new CommandResponse(list.toString(), ResponseType.SUCCESS);
     }
 }

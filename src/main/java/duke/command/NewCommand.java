@@ -23,6 +23,9 @@ public class NewCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList list, String description) {
+        assert list != null : "TaskList provided to NewCommand.execute() cannot be null.";
+        assert description != null : "Description provided to NewCommand.execute() cannot be null.";
+
         String[] parts = description.split(" ", 2);
         String taskType = parts[0].trim();
 

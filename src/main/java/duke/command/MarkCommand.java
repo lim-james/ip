@@ -16,6 +16,10 @@ public class MarkCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList list, String description) {
+        assert list != null : "TaskList provided to MarkCommand.execute() cannot be null.";
+        assert description != null
+                : "Description provided to MarkCommand.execute() cannot be null.";
+
         int index = Integer.parseInt(description) - 1;
         Task task = list.mark(index);
         return new CommandResponse(

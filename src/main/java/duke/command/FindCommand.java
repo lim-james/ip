@@ -18,6 +18,9 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList list, String description) {
+        assert list != null : "TaskList provided to FindCommand.execute() cannot be null.";
+        assert description != null
+                : "Description provided to FindCommand.execute() cannot be null.";
         TaskList filtered = list.filtered(description);
         return new CommandResponse(
                 "Here are the matching tasks in your list:\n" + filtered, ResponseType.SUCCESS);
