@@ -54,7 +54,7 @@ public class EventParser extends TaskParser {
         String[] parts = description.split("\\|");
 
         if (parts.length < 3) {
-            throw new CorruptSaveException("Event description incomplete '" + description + "'");
+            throw new CorruptSaveException(description);
         }
 
         description = parts[0].trim();

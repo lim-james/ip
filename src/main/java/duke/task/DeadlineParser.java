@@ -51,7 +51,7 @@ public class DeadlineParser extends TaskParser {
         String[] parts = description.split("\\|");
 
         if (parts.length < 2) {
-            throw new CorruptSaveException("Deadline description incomplete '" + description + "'");
+            throw new CorruptSaveException(description);
         }
 
         description = parts[0].trim();
