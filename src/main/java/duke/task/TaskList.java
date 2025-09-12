@@ -69,6 +69,15 @@ public class TaskList {
     }
 
     /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The size of the task list.
+     */
+    public int size() {
+        return this.list.size();
+    }
+
+    /**
      * Returns a new {@code TaskList} containing only the tasks whose descriptions match the given
      * keyword or phrase.
      *
