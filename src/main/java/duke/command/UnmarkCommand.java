@@ -28,7 +28,7 @@ public class UnmarkCommand extends Command {
         Task task = list.unmark(index);
 
         assert task != null : "TaskList.unmark() returned a null task.";
-        assert !task.isDone() : "Task was not marked as not done after UnmarkCommand execution.";
+        assert !task.isMarked() : "Task was not marked as not done after UnmarkCommand execution.";
 
         return new CommandResponse(
                 "OK, I've marked this task as not done yet:\n " + task, ResponseType.SUCCESS);

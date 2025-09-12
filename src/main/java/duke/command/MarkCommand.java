@@ -28,7 +28,7 @@ public class MarkCommand extends Command {
         Task task = list.mark(index);
 
         assert task != null : "TaskList.mark() returned a null task.";
-        assert task.isDone() : "Task was not marked as done after MarkCommand execution.";
+        assert task.isMarked() : "Task was not marked as done after MarkCommand execution.";
 
         return new CommandResponse(
                 "Nice! I've marked this task as done:\n " + task, ResponseType.SUCCESS);
