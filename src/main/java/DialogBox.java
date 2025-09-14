@@ -52,7 +52,7 @@ public class DialogBox extends HBox {
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right. Used for
-     * bot/Duke messages.
+     * bot/Dwight messages.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -73,10 +73,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a bot/Duke dialog box with avatar on the left and message on the right. Messages
+     * Creates a bot/Dwight dialog box with avatar on the left and message on the right. Messages
      * appear as gray bubbles (Telegram style).
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDwightDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

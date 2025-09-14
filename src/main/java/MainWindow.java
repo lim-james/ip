@@ -1,6 +1,6 @@
-import duke.Duke;
-import duke.command.CommandResponse;
-import duke.personality.PersonalityResponses;
+import dwight.Dwight;
+import dwight.command.CommandResponse;
+import dwight.personality.PersonalityResponses;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,9 +16,10 @@ public class MainWindow extends AnchorPane {
     @FXML private VBox dialogContainer;
     @FXML private TextField userInput;
     @FXML private Button sendButton;
-    private Duke duke;
+    private Dwight dwight;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/jim.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dwight.jpg"));
+    private Image dwightImage =
+            new Image(this.getClass().getResourceAsStream("/images/dwight.jpg"));
 
     /**
      * Initializes the controller after its root element has been completely processed. Sets up
@@ -28,30 +29,30 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
         String welcomeMsg = PersonalityResponses.WELCOME.getRandomResponse();
-        DialogBox welcomeDialog = DialogBox.getDukeDialog(welcomeMsg, this.dukeImage);
+        DialogBox welcomeDialog = DialogBox.getDwightDialog(welcomeMsg, this.dwightImage);
         this.dialogContainer.getChildren().addAll(welcomeDialog);
     }
 
     /**
-     * Injects the Duke instance.
+     * Injects the Dwight instance.
      *
-     * @param d The Duke instance to be used by this controller.
+     * @param d The Dwight instance to be used by this controller.
      */
-    public void setDuke(Duke d) {
-        this.duke = d;
+    public void setDwight(Dwight d) {
+        this.dwight = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
+     * Creates two dialog boxes, one echoing user input and the other containing Dwight's reply and
      * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        CommandResponse response = this.duke.getResponse(input);
+        CommandResponse response = this.dwight.getResponse(input);
         DialogBox userDialog = DialogBox.getUserDialog(input, this.userImage);
-        DialogBox dukeDialog = DialogBox.getDukeDialog(response.getMessage(), this.dukeImage);
-        this.dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+        DialogBox dwightDialog = DialogBox.getDwightDialog(response.getMessage(), this.dwightImage);
+        this.dialogContainer.getChildren().addAll(userDialog, dwightDialog);
         userInput.clear();
     }
 }
