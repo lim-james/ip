@@ -115,7 +115,7 @@ find report
 |-------------------------------------------|--------------------------------------|
 | `new todo <desc>`                         | Add a ToDo task                      |
 | `new deadline <desc> /by <date>`          | Add a Deadline task                  |
-| `new event <desc> /at <date>`             | Add an Event task                    |
+| `new event <desc> /from <date> /to <date>`| Add an Event task                    |
 | `list`                                    | List all tasks                       |
 | `mark <index>`                            | Mark a task as done                  |
 | `unmark <index>`                          | Unmark a task                        |
