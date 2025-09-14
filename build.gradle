@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'com.gradleup.shadow' version '9.1.0'
 }
 
 repositories {
@@ -65,6 +66,11 @@ tasks.withType(Checkstyle).configureEach {
 
 application {
     mainClass.set("Launcher")
+}
+
+shadowJar {
+    archiveBaseName = "dwight"
+    archiveClassifier = null
 }
 
 run {
