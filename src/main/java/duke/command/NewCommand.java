@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.DuplicateTaskException;
 import duke.task.IncompleteTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -42,7 +43,7 @@ public class NewCommand extends Command {
 
             return new CommandResponse(
                     "Got it. I've added this task:\n " + task, ResponseType.SUCCESS);
-        } catch (UnknownTaskTypeException | IncompleteTaskException e) {
+        } catch (UnknownTaskTypeException | IncompleteTaskException | DuplicateTaskException e) {
             return new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
         }
     }

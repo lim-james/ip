@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,11 +13,15 @@ import java.util.stream.IntStream;
  */
 public class TaskList {
 
+    /** Unique sets. */
+    private Set<String> uniqueTaskKeys;
+
     /** The underlying list storing all tasks. */
     private List<Task> list;
 
     /** Creates an empty {@code TaskList}. */
     public TaskList() {
+        this.uniqueTaskKeys = new HashSet<>();
         this.list = new ArrayList<>();
     }
 
@@ -25,8 +31,11 @@ public class TaskList {
      *
      * @param list The list of tasks to initialize the task list with.
      */
-    private TaskList(List<Task> list) {
-        this.list = list;
+    private TaskList(List<Task> list) throws DuplicateTaskException {
+        this();
+        for (Task task : list) {
+            this.add(task);
+        }
     }
 
     /**
@@ -34,7 +43,12 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void add(Task task) {
+    public void add(Task task) throws DuplicateTaskException {
+        String uniqueKey = task.getUniqueKey();
+        if (uniqueTaskKeys.contains(uniqueKey)) {
+            throw new DuplicateTaskException(task.toString());
+        }
+        uniqueTaskKeys.add(uniqueKey);
         this.list.add(task);
     }
 
@@ -85,10 +99,15 @@ public class TaskList {
      * @return A new {@code TaskList} containing the matching tasks.
      */
     public TaskList filtered(String description) {
-        return new TaskList(
-                this.list.stream()
-                        .filter(task -> task.isMatching(description))
-                        .collect(Collectors.toList()));
+        try {
+            return new TaskList(
+                    this.list.stream()
+                            .filter(task -> task.isMatching(description))
+                            .collect(Collectors.toList()));
+        } catch (DuplicateTaskException e) {
+            // This should never happen since we're filtering from a valid TaskList
+            throw new IllegalStateException("Unexpected duplicate found during filtering", e);
+        }
     }
 
     /**
