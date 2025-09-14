@@ -31,12 +31,12 @@ It helps you manage tasks efficiently in a **Command Line Interface (CLI)**, wit
 
 2. **Clone this repo**:
    ```bash
-   git clone https://github.com/{your-username}/{repo-name}.git
+   git clone https://github.com/lim-james/ip.git
    ```
 
 3. **Navigate into the project folder**:
    ```bash
-   cd {repo-name}
+   cd ip
    ```
 
 4. **Build the JAR** with Gradle:
@@ -68,8 +68,8 @@ It helps you manage tasks efficiently in a **Command Line Interface (CLI)**, wit
 ### Adding Tasks
 ```bash
 new todo Buy milk
-new deadline Submit report /by 2025-09-20
-new event Company retreat /at 2025-10-01
+new deadline Submit report /by Sep 20 2025
+new event Company retreat /from Oct 1 2025 /to Oct 5 2025
 ```
 
 ### Listing Tasks
@@ -137,7 +137,7 @@ A: Yes. Frequently.
 Once you enable GitHub Pages with the **`/docs`** folder as the source, you’ll be able to view this guide online at:
 
 ```
-https://{your-username}.github.io/{repo-name}/
+https://lim-james.github.io/ip/
 ```
 
 ---
