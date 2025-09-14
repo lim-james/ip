@@ -15,6 +15,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    @Override
+    public String getUniqueKey() {
+        return "T:" + super.getUniqueKey();
+    }
+
     /**
      * Returns a string representation of this task for display purposes. The string includes the
      * task type identifier {@code [T]}.
