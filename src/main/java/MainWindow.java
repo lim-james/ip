@@ -17,8 +17,8 @@ public class MainWindow extends AnchorPane {
     @FXML private TextField userInput;
     @FXML private Button sendButton;
     private Duke duke;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/jim.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dwight.jpg"));
 
     /**
      * Initializes the controller after its root element has been completely processed. Sets up

@@ -29,7 +29,7 @@
           AnchorPane.rightAnchor="0.0" 
           AnchorPane.topAnchor="0.0">
       <children>
-        <Label text="ChatBot" 
+        <Label text="Dwight K. Schrute" 
                style="-fx-text-fill: white; -fx-font: bold 18px 'Segoe UI';"
                HBox.hgrow="ALWAYS">
           <HBox.margin>
