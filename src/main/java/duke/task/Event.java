@@ -33,6 +33,11 @@ public class Event extends Task {
         this.to = to;
     }
 
+    @Override
+    public String getUniqueKey() {
+        return "E:" + super.getUniqueKey() + ":" + this.from + ":" + this.to;
+    }
+
     /**
      * Returns a string representation of this event task for display purposes. The string includes
      * the task type identifier {@code [E]}, the description, and the formatted start and end dates.

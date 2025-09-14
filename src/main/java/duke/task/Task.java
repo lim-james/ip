@@ -52,6 +52,10 @@ public abstract class Task {
         return this.description.contains(comp);
     }
 
+    public String getUniqueKey() {
+        return this.description;
+    }
+
     /**
      * Returns a string representation of the task for display purposes. The representation includes
      * the completion status indicator ({@code [X]} for done, {@code [ ]} for not done) and the

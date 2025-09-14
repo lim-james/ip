@@ -24,6 +24,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    @Override
+    public String getUniqueKey() {
+        return "D:" + super.getUniqueKey() + this.deadline;
+    }
+
     /**
      * Returns a string representation of this deadline task for display purposes. The string
      * includes the task type identifier {@code [D]} and the formatted due date.

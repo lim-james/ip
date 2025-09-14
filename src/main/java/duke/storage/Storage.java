@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.task.DuplicateTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskParser;
@@ -92,7 +93,9 @@ public class Storage {
             while ((line = reader.readLine()) != null) {
                 try {
                     tasks.add(parseFromLine(line));
-                } catch (CorruptSaveException | UnknownTaskTypeException e) {
+                } catch (CorruptSaveException
+                        | UnknownTaskTypeException
+                        | DuplicateTaskException e) {
                     System.out.println("Oh no! " + e.getMessage());
                 }
             }
