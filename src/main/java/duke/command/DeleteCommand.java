@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.personality.PersonalityResponses;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
 
         assert task != null : "TaskList.delete() returned a null task.";
 
-        return new CommandResponse(
-                "Noted. I've removed this task:\n " + task, ResponseType.SUCCESS);
+        String message = PersonalityResponses.DELETE_SUCCESS.getRandomResponse(task);
+        return new CommandResponse(message, ResponseType.SUCCESS);
     }
 }

@@ -1,5 +1,6 @@
 import duke.Duke;
 import duke.command.CommandResponse;
+import duke.personality.PersonalityResponses;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
-        String welcomeMsg = "Hello! I'm Peter. How can I help you?";
+        String welcomeMsg = PersonalityResponses.WELCOME.getRandomResponse();
         DialogBox welcomeDialog = DialogBox.getDukeDialog(welcomeMsg, this.dukeImage);
         this.dialogContainer.getChildren().addAll(welcomeDialog);
     }

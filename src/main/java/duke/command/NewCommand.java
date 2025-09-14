@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.personality.PersonalityResponses;
 import duke.task.DuplicateTaskException;
 import duke.task.IncompleteTaskException;
 import duke.task.Task;
@@ -41,10 +42,12 @@ public class NewCommand extends Command {
 
             list.add(task);
 
-            return new CommandResponse(
-                    "Got it. I've added this task:\n " + task, ResponseType.SUCCESS);
+            String message = PersonalityResponses.ADD_SUCCESS.getRandomResponse(task);
+            return new CommandResponse(message, ResponseType.SUCCESS);
         } catch (UnknownTaskTypeException | IncompleteTaskException | DuplicateTaskException e) {
-            return new CommandResponse("OH DEAR! " + e.getMessage(), ResponseType.ERROR);
+            String errorMessage =
+                    PersonalityResponses.GENERAL_ERROR.getRandomResponse(e.getMessage());
+            return new CommandResponse(errorMessage, ResponseType.ERROR);
         }
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.personality.PersonalityResponses;
 import duke.task.TaskList;
 
 /**
@@ -26,7 +27,7 @@ public class FindCommand extends Command {
 
         assert filtered != null : "TaskList.filtered returned a null TaskList object.";
 
-        return new CommandResponse(
-                "Here are the matching tasks in your list:\n" + filtered, ResponseType.SUCCESS);
+        String message = PersonalityResponses.FIND_SUCCESS.getRandomResponse(filtered);
+        return new CommandResponse(message, ResponseType.SUCCESS);
     }
 }

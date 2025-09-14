@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.personality.PersonalityResponses;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -30,7 +31,7 @@ public class UnmarkCommand extends Command {
         assert task != null : "TaskList.unmark() returned a null task.";
         assert !task.isMarked() : "Task was not marked as not done after UnmarkCommand execution.";
 
-        return new CommandResponse(
-                "OK, I've marked this task as not done yet:\n " + task, ResponseType.SUCCESS);
+        String message = PersonalityResponses.UNMARK_SUCCESS.getRandomResponse(task);
+        return new CommandResponse(message, ResponseType.SUCCESS);
     }
 }
