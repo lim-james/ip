@@ -6,9 +6,9 @@ Dwight is a Java-based task manager inspired by *The Office*.
 It helps you manage tasks efficiently in a **Command Line Interface (CLI)**, with personality-packed responses from Dwight himself.
 
 <p align="center">
-  <img src="docs/images/screenshot1.png" width="30%" />
-  <img src="docs/images/screenshot2.png" width="30%" />
-  <img src="docs/images/screenshot3.png" width="30%" />
+  <img src="docs/images/screenshot-1.png" width="30%" />
+  <img src="docs/images/screenshot-2.png" width="30%" />
+  <img src="docs/images/screenshot-3.png" width="30%" />
 </p>
 
 ---
