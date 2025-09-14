@@ -159,7 +159,7 @@ public enum PersonalityResponses {
             "Failure, like Ryan’s attempt at running a tech start-up. %s");
 
     private final String[] responses;
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     PersonalityResponses(String... responses) {
         this.responses = responses;
@@ -172,7 +172,7 @@ public enum PersonalityResponses {
      * @return A formatted response string
      */
     public String getRandomResponse(Object... args) {
-        String template = responses[random.nextInt(responses.length)];
+        String template = responses[RANDOM.nextInt(responses.length)];
         return String.format(template, args);
     }
 
