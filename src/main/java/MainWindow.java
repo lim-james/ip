@@ -15,22 +15,27 @@ public class MainWindow extends AnchorPane {
     @FXML private VBox dialogContainer;
     @FXML private TextField userInput;
     @FXML private Button sendButton;
-
     private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the controller after its root element has been completely processed. Sets up
+     * scroll pane binding and displays the welcome message.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
-
         String welcomeMsg = "Hello! I'm Peter. How can I help you?";
         DialogBox welcomeDialog = DialogBox.getDukeDialog(welcomeMsg, this.dukeImage);
         this.dialogContainer.getChildren().addAll(welcomeDialog);
     }
 
-    /** Injects the Duke instance */
+    /**
+     * Injects the Duke instance.
+     *
+     * @param d The Duke instance to be used by this controller.
+     */
     public void setDuke(Duke d) {
         this.duke = d;
     }

@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 public class Storage {
 
-    private final String TASK_MARKED = "1";
+    private static final String TASK_MARKED = "1";
 
     /** The path to the save file used for persistence. */
     private final String filepath;
