@@ -39,63 +39,8 @@
     -fx-clip: true;
 }
 
-/* Container styling for proper spacing */
-.dialog-container {
-    -fx-spacing: 8px;
-    -fx-padding: 10px 15px;
-}
-
-/* Message timestamp styling (if you want to add timestamps) */
-.timestamp {
-    -fx-text-fill: #8e9297;
-    -fx-font: 11px "Segoe UI", "Arial", sans-serif;
-    -fx-padding: 2px 8px 0px 8px;
-}
-
-/* Online status indicator for profile pictures */
-.online-indicator {
-    -fx-background-color: #4caf50;
-    -fx-background-radius: 50%;
-    -fx-border-color: #0f1419;
-    -fx-border-width: 2px;
-    -fx-border-radius: 50%;
-    -fx-pref-width: 12px;
-    -fx-pref-height: 12px;
-}
-
-/* Message status indicators (sent, delivered, read) */
-.message-status {
-    -fx-text-fill: #8e9297;
-    -fx-font: 12px "Segoe UI", "Arial", sans-serif;
-}
-
-.message-delivered {
-    -fx-text-fill: #5288c1;
-}
-
-.message-read {
-    -fx-text-fill: #4caf50;
-}
-
 /* Hover effects for messages */
 .label:hover,
 .reply-label:hover {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 6, 0.4, 0, 2);
-}
-
-/* Selection highlight */
-.label:focused,
-.reply-label:focused {
-    -fx-border-color: rgba(82, 136, 193, 0.5);
-    -fx-border-width: 1px;
-}
-
-/* Link styling within messages */
-.message-link {
-    -fx-text-fill: #64b5f6;
-    -fx-underline: true;
-}
-
-.message-link:hover {
-    -fx-text-fill: #90caf9;
 }
