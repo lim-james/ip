@@ -10,25 +10,20 @@ repositories {
   mavenCentral()
 }
 
+ext.detectFxPlatform = {
+    def os = org.gradle.internal.os.OperatingSystem.current()
+    def arch = System.getProperty('os.arch')
+    if (os.isMacOsX())    return (arch.contains('aarch64') || arch.contains('arm')) ? 'mac-aarch64' : 'mac'
+    if (os.isWindows())   return 'win'
+    if (os.isLinux())     return (arch.contains('aarch64') || arch.contains('arm')) ? 'linux-aarch64' : 'linux'
+    throw new GradleException("Unsupported OS/arch: ${os}/${arch}")
+}
+
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.10.0'
-
-    String javaFxVersion = '17.0.7'
-
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
 test {
@@ -51,6 +46,11 @@ java {
     }
 }
 
+javafx {
+    version = '17.0.7'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base'] 
+}
+
 checkstyle {
     toolVersion = '10.24.0'
     configFile = file('config/checkstyle/checkstyle.xml')
@@ -69,10 +69,16 @@ application {
     mainClass.set('Launcher')
 }
 
+def fxPlatform = project.findProperty('javafx.platform') ?: detectFxPlatform()
+
+tasks.named('jar') { enabled = false }
+
 shadowJar {
-    archiveBaseName = 'dwight'
-    archiveClassifier = null
-    archiveFileName = 'dwight.jar'
+    archiveBaseName.set('dwight')
+    archiveVersion.set('')
+    archiveClassifier.set(fxPlatform)
+    mergeServiceFiles()
+    manifest { attributes 'Main-Class': 'Launcher' }
 }
 
 run {
