@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -34,9 +35,19 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
+        this.makeImageCircular();
+
         // Set default styling for user messages (right side)
         this.setAlignment(Pos.TOP_RIGHT);
         this.setSpacing(8.0);
+    }
+
+    /** Makes the profile picture circular by applying a circular clip. */
+    private void makeImageCircular() {
+        // Create a circle with radius equal to half the image width
+        double radius = displayPicture.getFitWidth() / 2;
+        Circle clip = new Circle(radius, radius, radius);
+        displayPicture.setClip(clip);
     }
 
     /**
