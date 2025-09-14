@@ -60,9 +60,9 @@ class TaskListTest {
         this.taskList.add(task);
 
         Task marked = this.taskList.mark(0);
-        Task unmarked = this.taskList.unmark(0);
-
         assertTrue(marked.isMarked(), "Task should be marked after mark()");
+
+        Task unmarked = this.taskList.unmark(0);
         assertFalse(unmarked.isMarked(), "Task should be unmarked after unmark()");
     }
 
