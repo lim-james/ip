@@ -1,4 +1,4 @@
-import duke.Duke;
+import dwight.Dwight;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/** A GUI for Duke using FXML. */
+/** A GUI for Dwight using FXML. */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Dwight dwight = new Dwight();
 
     @Override
     public void start(Stage stage) {
@@ -22,7 +22,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
-            fxmlLoader.<MainWindow>getController().setDuke(duke); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setDwight(dwight); // inject the Dwight instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
