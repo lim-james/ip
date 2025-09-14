@@ -5,7 +5,7 @@ package dwight.task;
  * {@link ToDo}, {@link Deadline}, and {@link Event} extend this class to provide additional
  * behavior.
  */
-public abstract class Task {
+public abstract class Task<T extends Task<T>> {
 
     /** The textual description of the task. */
     private String description;
@@ -27,15 +27,15 @@ public abstract class Task {
     }
 
     /** Marks the task as completed. */
-    public Task mark() {
+    public T mark() {
         this.isDone = true;
-        return this;
+        return (T) this;
     }
 
     /** Marks the task as not completed. */
-    public Task unmark() {
+    public T unmark() {
         this.isDone = false;
-        return this;
+        return (T) this;
     }
 
     public boolean isMarked() {

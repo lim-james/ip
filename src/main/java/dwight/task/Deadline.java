@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task with a specific deadline. A {@code Deadline} includes a description and a due
  * date.
  */
-public class Deadline extends Task {
+public class Deadline extends Task<Deadline> {
 
     /** The due date of the deadline task. */
     private LocalDate deadline;

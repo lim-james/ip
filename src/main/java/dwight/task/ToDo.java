@@ -4,7 +4,7 @@ package dwight.task;
  * Represents a task without any date or time constraints. A {@code ToDo} is identified only by its
  * description.
  */
-public class ToDo extends Task {
+public class ToDo extends Task<ToDo> {
 
     /**
      * Creates a new {@code ToDo} task with the specified description.

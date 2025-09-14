@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that occurs within a specified time range. An {@code Event} includes a
  * description, a start date, and an end date.
  */
-public class Event extends Task {
+public class Event extends Task<Event> {
 
     /** The start date of the event. */
     private LocalDate from;
