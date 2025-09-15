@@ -22,8 +22,11 @@ public class DeleteCommand extends Command {
 
         int index = Integer.parseInt(description) - 1;
 
-        assert index >= 0 && index < list.size()
-                : "Parsed index is out of bounds for the TaskList.";
+        if (index < 0 || index >= list.size()) {
+            String error = "Index out of bounds.";
+            String message = PersonalityResponses.GENERAL_ERROR.getRandomResponse(error);
+            return new CommandResponse(message, ResponseType.ERROR);
+        }
 
         Task task = list.delete(index);
 

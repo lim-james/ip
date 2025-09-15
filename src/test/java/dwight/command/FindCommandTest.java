@@ -2,7 +2,7 @@ package dwight.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dwight.task.TaskList;
 import dwight.task.ToDo;
@@ -58,12 +58,13 @@ class FindCommandTest {
         assertEquals(0, empty.size());
     }
 
-    /**
-     * Executes a find with a null description and expects an assertion error. Requires running
-     * tests with JVM assertions enabled (-ea).
-     */
+    /** Executes a find with a null description and expects an error response. */
     @Test
-    void executeWithNullDescriptionThrowsAssertionError() {
-        assertThrows(AssertionError.class, () -> this.findCommand.execute(this.taskList, null));
+    void executeWithNullDescriptionReturnsErrorResponse() {
+        CommandResponse response = this.findCommand.execute(this.taskList, null);
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Search keyword cannot be empty."),
+                "Error message should mention search keyword cannot be empty.");
     }
 }

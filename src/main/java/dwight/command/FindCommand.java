@@ -20,8 +20,12 @@ public class FindCommand extends Command {
     @Override
     public CommandResponse execute(TaskList list, String description) {
         assert list != null : "TaskList provided to FindCommand.execute() cannot be null.";
-        assert description != null
-                : "Description provided to FindCommand.execute() cannot be null.";
+
+        if (description == null || description.trim().isEmpty()) {
+            String error = "Search keyword cannot be empty.";
+            String message = PersonalityResponses.GENERAL_ERROR.getRandomResponse(error);
+            return new CommandResponse(message, ResponseType.ERROR);
+        }
 
         TaskList filtered = list.filtered(description);
 

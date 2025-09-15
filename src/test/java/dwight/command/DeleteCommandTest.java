@@ -1,6 +1,8 @@
 package dwight.command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dwight.task.TaskList;
 import dwight.task.ToDo;
@@ -35,22 +37,29 @@ class DeleteCommandTest {
     }
 
     /**
-     * Executes a delete command on an empty list, expecting an assertion error due to an
+     * Executes a delete command on an empty list, expecting an error response due to an
      * out-of-bounds index.
      */
     @Test
-    void executeOnEmptyListThrowsAssertionError() {
-        assertThrows(AssertionError.class, () -> this.deleteCommand.execute(this.taskList, "1"));
+    void executeOnEmptyListReturnsErrorResponse() {
+        CommandResponse response = this.deleteCommand.execute(this.taskList, "1");
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
-    /**
-     * Executes a delete command with an index larger than the task list size, expecting an
-     * assertion error.
-     */
+    /** Executes a delete command with an out-of-bounds index, expecting an error response. */
     @Test
-    void executeOutOfBoundsIndexThrowsAssertionError() throws Exception {
+    void executeOutOfBoundsIndexReturnsErrorResponse() throws Exception {
         this.taskList.add(new ToDo("Read book"));
-        assertThrows(AssertionError.class, () -> this.deleteCommand.execute(this.taskList, "2"));
+
+        CommandResponse response = this.deleteCommand.execute(this.taskList, "2");
+
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
     /**

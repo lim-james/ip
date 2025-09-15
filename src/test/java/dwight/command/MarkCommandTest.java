@@ -36,20 +36,27 @@ class MarkCommandTest {
         assertEquals(ResponseType.SUCCESS, response.getType());
     }
 
-    /**
-     * Executes a mark command on an empty list, expecting an assertion error. Requires running
-     * tests with JVM assertions enabled (-ea).
-     */
+    /** Executes a mark command on an empty list, expecting an error response. */
     @Test
-    void executeOnEmptyListThrowsAssertionError() {
-        assertThrows(AssertionError.class, () -> this.markCommand.execute(this.taskList, "1"));
+    void executeOnEmptyListReturnsErrorResponse() {
+        CommandResponse response = this.markCommand.execute(this.taskList, "1");
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
-    /** Executes a mark command with an out-of-bounds index, expecting an assertion error. */
+    /** Executes a mark command with an out-of-bounds index, expecting an error response. */
     @Test
-    void executeOutOfBoundsIndexThrowsAssertionError() throws Exception {
+    void executeOutOfBoundsIndexReturnsErrorResponse() throws Exception {
         this.taskList.add(new ToDo("Read book"));
-        assertThrows(AssertionError.class, () -> this.markCommand.execute(this.taskList, "2"));
+
+        CommandResponse response = this.markCommand.execute(this.taskList, "2");
+
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
     /**

@@ -41,6 +41,6 @@ public class CommandResponse {
      */
     @Override
     public String toString() {
-        return "[" + type + "] " + message;
+        return "[" + this.type + "] " + this.message;
     }
 }

@@ -3,6 +3,7 @@ package dwight.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dwight.task.Task;
 import dwight.task.TaskList;
@@ -37,20 +38,27 @@ class UnmarkCommandTest {
         assertEquals(ResponseType.SUCCESS, response.getType());
     }
 
-    /**
-     * Executes an unmark command on an empty list, expecting an assertion error. Requires running
-     * tests with JVM assertions enabled (-ea).
-     */
+    /** Executes an unmark command on an empty list, expecting an error response. */
     @Test
-    void executeOnEmptyListThrowsAssertionError() {
-        assertThrows(AssertionError.class, () -> this.unmarkCommand.execute(this.taskList, "1"));
+    void executeOnEmptyListReturnsErrorResponse() {
+        CommandResponse response = this.unmarkCommand.execute(this.taskList, "1");
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
-    /** Executes an unmark command with an out-of-bounds index, expecting an assertion error. */
+    /** Executes an unmark command with an out-of-bounds index, expecting an error response. */
     @Test
     void executeOutOfBoundsIndexThrowsAssertionError() throws Exception {
         this.taskList.add(new ToDo("Read book"));
-        assertThrows(AssertionError.class, () -> this.unmarkCommand.execute(this.taskList, "2"));
+
+        CommandResponse response = this.unmarkCommand.execute(this.taskList, "2");
+
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Index out of bounds"),
+                "Error message should mention index out of bounds.");
     }
 
     /**
