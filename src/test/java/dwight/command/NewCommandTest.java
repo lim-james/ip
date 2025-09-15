@@ -56,4 +56,14 @@ class NewCommandTest {
         CommandResponse response = this.newCommand.execute(this.taskList, "todo Buy milk");
         assertEquals(ResponseType.ERROR, response.getType());
     }
+
+    /** Executes a new with a null description and expects an error response. */
+    @Test
+    void executeWithNullDescriptionReturnsErrorResponse() {
+        CommandResponse response = this.newCommand.execute(this.taskList, null);
+        assertEquals(ResponseType.ERROR, response.getType(), "Response should indicate an error.");
+        assertTrue(
+                response.getMessage().contains("Task description cannot be empty."),
+                "Error message should mention task description cannot be empty.");
+    }
 }
