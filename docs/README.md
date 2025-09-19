@@ -138,15 +138,5 @@ A: Yes. Frequently.
 
 ---
 
-## 🔗 GitHub Pages
-
-Once you enable GitHub Pages with the **`/docs`** folder as the source, you’ll be able to view this guide online at:
-
-```
-https://lim-james.github.io/ip/
-```
-
----
-
 Enjoy using Dwight, and remember: *Identity theft is not a joke, Jim!*
 
