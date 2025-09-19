@@ -3,11 +3,10 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.gradleup.shadow' version '9.1.0'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 ext.detectFxPlatform = {
@@ -19,19 +18,24 @@ ext.detectFxPlatform = {
     throw new GradleException("Unsupported OS/arch: ${os}/${arch}")
 }
 
+def fxPlatform = (findProperty('javafx.platform') ?: detectFxPlatform())
+def fxVersion  = '17.0.7'
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
-    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.10.0'
+    implementation "org.openjfx:javafx-base:${fxVersion}:${fxPlatform}"
+    implementation "org.openjfx:javafx-graphics:${fxVersion}:${fxPlatform}"
+    implementation "org.openjfx:javafx-controls:${fxVersion}:${fxPlatform}"
+    implementation "org.openjfx:javafx-fxml:${fxVersion}:${fxPlatform}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly  'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testRuntimeOnly  'org.junit.platform:junit-platform-launcher:1.10.0'
 }
 
 test {
     useJUnitPlatform()
-
     testLogging {
         events 'passed', 'skipped', 'failed'
-
         showExceptions true
         exceptionFormat 'full'
         showCauses true
@@ -41,14 +45,7 @@ test {
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-javafx {
-    version = '17.0.7'
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.base'] 
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
 }
 
 checkstyle {
@@ -57,19 +54,16 @@ checkstyle {
     ignoreFailures = false
     maxWarnings = 0
 }
-
 tasks.withType(Checkstyle).configureEach {
     reports {
-       xml.required = false
-       html.required = true
+        xml.required = false
+        html.required = true
     }
-}     
+}
 
 application {
     mainClass.set('Launcher')
 }
-
-def fxPlatform = project.findProperty('javafx.platform') ?: detectFxPlatform()
 
 tasks.named('jar') { enabled = false }
 
@@ -84,3 +78,4 @@ shadowJar {
 run {
     standardInput = System.in
 }
+
