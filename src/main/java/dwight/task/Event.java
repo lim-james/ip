@@ -46,7 +46,7 @@ public class Event extends Task<Event> {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM");
         String fromStr = "from: " + this.from.format(formatter);
         String toStr = "to: " + this.to.format(formatter);
         return "[E]" + super.toString() + " (" + fromStr + " " + toStr + ")";
@@ -61,7 +61,7 @@ public class Event extends Task<Event> {
      */
     @Override
     public String serialize() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         String fromStr = " | " + this.from.format(formatter);
         String toStr = " | " + this.to.format(formatter);
         return "E | " + super.serialize() + fromStr + toStr;

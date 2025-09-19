@@ -24,14 +24,14 @@ public class EventTest {
 
         // Unmarked event
         assertEquals(
-                "[E][ ] project meeting (from: Oct 26 to: Oct 30)",
+                "[E][ ] project meeting (from: 26 Oct to: 30 Oct)",
                 event.toString(),
                 "Unmarked event should display with [ ] and the correct date range");
 
         // Marked event
         event.mark();
         assertEquals(
-                "[E][X] project meeting (from: Oct 26 to: Oct 30)",
+                "[E][X] project meeting (from: 26 Oct to: 30 Oct)",
                 event.toString(),
                 "Marked event should display with [X] and the correct date range");
     }
@@ -48,14 +48,14 @@ public class EventTest {
 
         // Unmarked event
         assertEquals(
-                "E | 0 | project meeting | Oct 26 2023 | Oct 30 2023",
+                "E | 0 | project meeting | 26 Oct 2023 | 30 Oct 2023",
                 event.serialize(),
                 "Unmarked event should serialize with 0 and correct dates");
 
         // Marked event
         event.mark();
         assertEquals(
-                "E | 1 | project meeting | Oct 26 2023 | Oct 30 2023",
+                "E | 1 | project meeting | 26 Oct 2023 | 30 Oct 2023",
                 event.serialize(),
                 "Marked event should serialize with 1 and correct dates");
     }

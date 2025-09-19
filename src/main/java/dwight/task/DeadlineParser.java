@@ -22,17 +22,23 @@ public class DeadlineParser extends TaskParser {
      */
     @Override
     public Task parse(String description) throws IncompleteTaskException {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IncompleteTaskException(
+                    "The 'deadline' command requires a description and a '/by' date. Format:"
+                            + " deadline <description> /by <date e.g. 14 Feb 2025>");
+        }
+
         Pattern pattern = Pattern.compile("^(.+?)\\s*/by\\s+(.+)$");
         Matcher matcher = pattern.matcher(description);
 
         if (!matcher.matches()) {
             throw new IncompleteTaskException(
                     "The 'deadline' command requires a description and a '/by' date. Format:"
-                            + " deadline <description> /by <date>");
+                            + " deadline <description> /by <date e.g. 14 Feb 2025>");
         }
 
         String dateStr = matcher.group(2);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         LocalDate date = LocalDate.parse(dateStr, formatter);
 
         return new Deadline(matcher.group(1), date);
@@ -60,7 +66,7 @@ public class DeadlineParser extends TaskParser {
         description = parts[0].trim();
 
         String deadlineStr = parts[1].trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         LocalDate deadline = LocalDate.parse(deadlineStr, formatter);
 
         return new Deadline(description, deadline);
