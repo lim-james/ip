@@ -128,7 +128,7 @@ find report
 ## ❓ FAQ
 
 **Q: Where are tasks saved?**  
-A: In a local save file (`data/tasks.txt` by default).
+A: In a local save file (`./dwight-2103-ip.txt` by default).
 
 **Q: What happens if I delete the save file?**  
 A: Dwight will create a new one and start with an empty list.
