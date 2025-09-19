@@ -103,9 +103,9 @@ find report
 
 ## 💾 Saving and Loading
 
-- Tasks are saved automatically after every change into a local file.  
+- Tasks are saved automatically after every command.
 - When Dwight starts, it loads the existing tasks from storage.  
-- If the save file is missing or corrupted, Dwight starts with an empty list.
+- If the save file is missing or corrupted, Dwight skips that line.
 
 ---
 
