@@ -17,10 +17,21 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResponse execute(TaskList list, String description) {
         assert list != null : "TaskList provided to DeleteCommand.execute() cannot be null.";
-        assert description != null
-                : "Description provided to DeleteCommand.execute() cannot be null.";
 
-        int index = Integer.parseInt(description) - 1;
+        if (description == null || description.trim().isEmpty()) {
+            String error = "You have to specify an index to delete";
+            String message = PersonalityResponses.GENERAL_ERROR.getRandomResponse(error);
+            return new CommandResponse(message, ResponseType.ERROR);
+        }
+
+        int index;
+        try {
+            index = Integer.parseInt(description) - 1;
+        } catch (NumberFormatException e) {
+            String error = "'" + description + "' is not a valid index...";
+            String message = PersonalityResponses.GENERAL_ERROR.getRandomResponse(error);
+            return new CommandResponse(message, ResponseType.ERROR);
+        }
 
         if (index < 0 || index >= list.size()) {
             String error = "Index out of bounds.";
