@@ -39,8 +39,9 @@ public class EventParserTest {
         Exception exception =
                 assertThrows(IncompleteTaskException.class, () -> parser.parse(invalidDescription));
         assertEquals(
-                "The 'event' command requires a description, a '/from' time, and a '/to' time."
-                        + " Format: event <description> /from <start time> /to <end time>",
+                "The 'event' command requires a description, a '/from' date, and a '/to' date."
+                        + " Format: event <description> /from <date e.g. 14 Feb 2025> /to <date"
+                        + " e.g. 14 Feb 2025>",
                 exception.getMessage());
     }
 
@@ -55,8 +56,9 @@ public class EventParserTest {
         Exception exception =
                 assertThrows(IncompleteTaskException.class, () -> parser.parse(invalidDescription));
         assertEquals(
-                "The 'event' command requires a description, a '/from' time, and a '/to' time."
-                        + " Format: event <description> /from <start time> /to <end time>",
+                "The 'event' command requires a description, a '/from' date, and a '/to' date."
+                        + " Format: event <description> /from <date e.g. 14 Feb 2025> /to <date"
+                        + " e.g. 14 Feb 2025>",
                 exception.getMessage());
     }
 

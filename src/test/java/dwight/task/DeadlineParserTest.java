@@ -46,8 +46,8 @@ public class DeadlineParserTest {
                 assertThrows(IncompleteTaskException.class, () -> parser.parse(invalidDescription));
 
         assertEquals(
-                "The 'deadline' command requires a description and a '/by' date. "
-                        + "Format: deadline <description> /by <date>",
+                "The 'deadline' command requires a description and a '/by' date. Format:"
+                        + " deadline <description> /by <date e.g. 14 Feb 2025>",
                 exception.getMessage());
     }
 
