@@ -61,9 +61,9 @@ It helps you manage tasks efficiently in a **Command Line Interface (CLI)**, wit
 
 - Add **ToDo, Deadline, and Event** tasks  
 - List all tasks with numbering  
-- Mark and unmark tasks as completed  
-- Delete tasks  
-- Search for tasks by keyword  
+- Mark and unmark task as completed by index
+- Delete task by index
+- Search for tasks description by keyword  
 - Automatic save and load from storage  
 - Personality-driven responses by Dwight  
 
