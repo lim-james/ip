@@ -45,11 +45,21 @@ public class TaskList {
      */
     public void add(Task task) throws DuplicateTaskException {
         String uniqueKey = task.getUniqueKey();
-        if (uniqueTaskKeys.contains(uniqueKey)) {
+        if (this.uniqueTaskKeys.contains(uniqueKey)) {
             throw new DuplicateTaskException(task.toString());
         }
-        uniqueTaskKeys.add(uniqueKey);
+        this.uniqueTaskKeys.add(uniqueKey);
         this.list.add(task);
+    }
+
+    /**
+     * Gets the task at the specified index.
+     *
+     * @param at The 0-based index of the task.
+     * @return The specified task.
+     */
+    public Task get(int at) {
+        return this.list.get(at);
     }
 
     /**
@@ -59,6 +69,7 @@ public class TaskList {
      * @return The removed task.
      */
     public Task delete(int at) {
+        this.uniqueTaskKeys.remove(this.list.get(at).getUniqueKey());
         return this.list.remove(at);
     }
 
