@@ -37,7 +37,7 @@ public class Deadline extends Task<Deadline> {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM");
         String dateStr = this.deadline.format(formatter);
         return "[D]" + super.toString() + " (by: " + dateStr + ")";
     }
@@ -51,7 +51,7 @@ public class Deadline extends Task<Deadline> {
      */
     @Override
     public String serialize() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         String dateStr = this.deadline.format(formatter);
         return "D | " + super.serialize() + " | " + dateStr;
     }

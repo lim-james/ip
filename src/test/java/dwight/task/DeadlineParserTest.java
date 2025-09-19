@@ -21,12 +21,12 @@ public class DeadlineParserTest {
     @Test
     public void testParseValidDescriptionReturnsDeadlineTask() throws IncompleteTaskException {
         DeadlineParser parser = new DeadlineParser();
-        String description = "submit project proposal /by Feb 20 2025";
+        String description = "submit project proposal /by 20 Feb 2025";
         Task task = parser.parse(description);
 
         assertTrue(task instanceof Deadline, "Parser should return a Deadline instance");
 
-        String expectedToString = "[D][ ] submit project proposal (by: Feb 20)";
+        String expectedToString = "[D][ ] submit project proposal (by: 20 Feb)";
         assertEquals(
                 expectedToString,
                 task.toString(),
@@ -58,12 +58,12 @@ public class DeadlineParserTest {
     @Test
     public void testParseFromFileValidDescriptionReturnsDeadlineTask() throws CorruptSaveException {
         DeadlineParser parser = new DeadlineParser();
-        String savedDescription = "submit report | Dec 25 2024";
+        String savedDescription = "submit report | 25 Dec 2024";
         Task task = parser.parseFromFile(savedDescription);
 
         assertTrue(task instanceof Deadline, "Parser should return a Deadline instance");
 
-        String expectedToString = "[D][ ] submit report (by: Dec 25)";
+        String expectedToString = "[D][ ] submit report (by: 25 Dec)";
         assertEquals(
                 expectedToString,
                 task.toString(),

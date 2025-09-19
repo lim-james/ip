@@ -21,10 +21,10 @@ public class EventParserTest {
     @Test
     void testParseValidDescriptionReturnsEventTask() throws IncompleteTaskException {
         EventParser parser = new EventParser();
-        String description = "project meeting /from Feb 10 2025 /to Feb 12 2025";
+        String description = "project meeting /from 10 Feb 2025 /to 12 Feb 2025";
         Task task = parser.parse(description);
         assertTrue(task instanceof Event);
-        String expectedToString = "[E][ ] project meeting (from: Feb 10 to: Feb 12)";
+        String expectedToString = "[E][ ] project meeting (from: 10 Feb to: 12 Feb)";
         assertEquals(expectedToString, task.toString());
     }
 
@@ -35,7 +35,7 @@ public class EventParserTest {
     @Test
     void testParseNoToThrowsIncompleteTaskException() {
         EventParser parser = new EventParser();
-        String invalidDescription = "project meeting /from Feb 10 2025";
+        String invalidDescription = "project meeting /from 10 Feb 2025";
         Exception exception =
                 assertThrows(IncompleteTaskException.class, () -> parser.parse(invalidDescription));
         assertEquals(
@@ -51,7 +51,7 @@ public class EventParserTest {
     @Test
     void testParseNoFromThrowsIncompleteTaskException() {
         EventParser parser = new EventParser();
-        String invalidDescription = "project meeting /to Feb 12 2025";
+        String invalidDescription = "project meeting /to 12 Feb 2025";
         Exception exception =
                 assertThrows(IncompleteTaskException.class, () -> parser.parse(invalidDescription));
         assertEquals(
@@ -67,10 +67,10 @@ public class EventParserTest {
     @Test
     void testParseFromFileValidDescriptionReturnsEventTask() throws CorruptSaveException {
         EventParser parser = new EventParser();
-        String savedDescription = "project meeting | Feb 10 2025 | Feb 12 2025";
+        String savedDescription = "project meeting | 10 Feb 2025 | 12 Feb 2025";
         Task task = parser.parseFromFile(savedDescription);
         assertTrue(task instanceof Event);
-        String expectedToString = "[E][ ] project meeting (from: Feb 10 to: Feb 12)";
+        String expectedToString = "[E][ ] project meeting (from: 10 Feb to: 12 Feb)";
         assertEquals(expectedToString, task.toString());
     }
 
@@ -81,7 +81,7 @@ public class EventParserTest {
     @Test
     void testParseFromFileIncompleteDescriptionThrowsCorruptSaveException() {
         EventParser parser = new EventParser();
-        String invalidSavedDescription = "project meeting | Feb 10 2025";
+        String invalidSavedDescription = "project meeting | 10 Feb 2025";
         Exception exception =
                 assertThrows(
                         CorruptSaveException.class,

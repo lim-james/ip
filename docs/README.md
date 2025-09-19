@@ -74,8 +74,8 @@ It helps you manage tasks efficiently in a **Command Line Interface (CLI)**, wit
 ### Adding Tasks
 ```bash
 new todo Buy milk
-new deadline Submit report /by Sep 20 2025
-new event Company retreat /from Oct 1 2025 /to Oct 5 2025
+new deadline Submit report /by 20 Sep 2025
+new event Company retreat /from 1 Oct 2025 /to 5 Oct 2025
 ```
 
 ### Listing Tasks

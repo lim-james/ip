@@ -19,11 +19,11 @@ public class Dwight {
     private TaskList taskList;
 
     /**
-     * Creates a new {@code Dwight} instance and initializes the storage and task list. Loads existing
-     * tasks from the storage file if available.
+     * Creates a new {@code Dwight} instance and initializes the storage and task list. Loads
+     * existing tasks from the storage file if available.
      */
     public Dwight() {
-        this.storage = new Storage("./james-2103-ip.txt");
+        this.storage = new Storage("./dwight-2103-ip.txt");
         try {
             this.taskList = this.storage.load();
         } catch (IOException e) {

@@ -16,7 +16,14 @@ public class ListCommand extends Command {
     @Override
     public CommandResponse execute(TaskList list, String description) {
         assert list != null : "TaskList provided to ListCommand.execute() cannot be null.";
-        String message = PersonalityResponses.LIST_RESPONSE.getRandomResponse(list.toString());
-        return new CommandResponse(message, ResponseType.SUCCESS);
+        String listStr = list.toString();
+        if (listStr.isEmpty()) {
+            String message =
+                    PersonalityResponses.GENERAL_ERROR.getRandomResponse("You have no tasks.");
+            return new CommandResponse(message, ResponseType.SUCCESS);
+        } else {
+            String message = PersonalityResponses.LIST_RESPONSE.getRandomResponse(listStr);
+            return new CommandResponse(message, ResponseType.SUCCESS);
+        }
     }
 }

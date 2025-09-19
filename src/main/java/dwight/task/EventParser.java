@@ -22,16 +22,24 @@ public class EventParser extends TaskParser {
      */
     @Override
     public Task parse(String description) throws IncompleteTaskException {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IncompleteTaskException(
+                    "The 'event' command requires a description, a '/from' date, and a '/to' date."
+                            + " Format: event <description> /from <date e.g. 14 Feb 2025> /to <date"
+                            + " e.g. 14 Feb 2025>");
+        }
+
         Pattern pattern = Pattern.compile("^(.+?)\\s*/from\\s*(.+?)\\s*/to\\s*(.+)$");
         Matcher matcher = pattern.matcher(description);
 
         if (!matcher.matches()) {
             throw new IncompleteTaskException(
-                    "The 'event' command requires a description, a '/from' time, and a '/to' time."
-                            + " Format: event <description> /from <start time> /to <end time>");
+                    "The 'event' command requires a description, a '/from' date, and a '/to' date."
+                            + " Format: event <description> /from <date e.g. 14 Feb 2025> /to <date"
+                            + " e.g. 14 Feb 2025>");
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
 
         String fromStr = matcher.group(2);
         LocalDate from = LocalDate.parse(fromStr, formatter);
@@ -62,7 +70,7 @@ public class EventParser extends TaskParser {
 
         description = parts[0].trim();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         String fromStr = parts[1].trim();
         LocalDate from = LocalDate.parse(fromStr, formatter);
         String toStr = parts[2].trim();

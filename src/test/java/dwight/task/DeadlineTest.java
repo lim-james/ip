@@ -23,14 +23,14 @@ public class DeadlineTest {
 
         // Unmarked deadline
         assertEquals(
-                "[D][ ] submit report (by: Nov 15)",
+                "[D][ ] submit report (by: 15 Nov)",
                 deadline.toString(),
                 "Unmarked deadline should display with [ ] and correct date");
 
         // Marked deadline
         deadline.mark();
         assertEquals(
-                "[D][X] submit report (by: Nov 15)",
+                "[D][X] submit report (by: 15 Nov)",
                 deadline.toString(),
                 "Marked deadline should display with [X] and correct date");
     }
@@ -46,14 +46,14 @@ public class DeadlineTest {
 
         // Unmarked deadline
         assertEquals(
-                "D | 0 | submit report | Nov 15 2023",
+                "D | 0 | submit report | 15 Nov 2023",
                 deadline.serialize(),
                 "Unmarked deadline should serialize with 0 and correct date");
 
         // Marked deadline
         deadline.mark();
         assertEquals(
-                "D | 1 | submit report | Nov 15 2023",
+                "D | 1 | submit report | 15 Nov 2023",
                 deadline.serialize(),
                 "Marked deadline should serialize with 1 and correct date");
     }
